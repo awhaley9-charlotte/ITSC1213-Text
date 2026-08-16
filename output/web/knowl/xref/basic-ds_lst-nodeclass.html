@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<figure class="listing figure-like"><figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">1.21.3<span class="period">.</span></span><span class="space"> </span><div class="autopermalink" data-description="Listing 1.21.3"><a href="#basic-ds_lst-nodeclass" title="Copy heading and permalink for Listing 1.21.3">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program"><code class="language-py">class Node:
+    """A node of a linked list"""
+
+    def __init__(self, node_data):
+        self._data = node_data
+        self._next = None
+
+    def get_data(self):
+        """Get node data"""
+        return self._data
+
+    def set_data(self, node_data):
+        """Set node data"""
+        self._data = node_data
+
+    data = property(get_data, set_data)
+
+    def get_next(self):
+        """Get next node"""
+        return self._next
+
+    def set_next(self, node_next):
+        """Set next node"""
+        self._next = node_next
+
+    next = property(get_next, set_next)
+
+    def __str__(self):
+        """String"""
+        return str(self._data)
+</code></pre></div></div></figure><span class="incontext"><a class="internal" href="basic-ds_implementing-an-unordered-list-linked-lists.html#basic-ds_lst-nodeclass">in-context</a></span>
+</body>
+</html>

@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DS Queue Simulation: Printing Tasks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/ol-markers.css" rel="stylesheet" type="text/css">
+<script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
+  },
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math"
+  },
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
+  },
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "_static/pretext/js/lib"
+    }
+  },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="ITSC 1213 - Python Problem Solving and Data Structures-lite.">
+<meta property="book:author" content="Assembled by Adam Whaley">
+<meta property="book:author" content="Original Text: How to Think like a Computer Scientist.">
+<meta property="book:author" content="Original Text: Problem Solving with Algorithms and Data Structures">
+<meta property="book:author" content="Original Text: Python for Everybody - Interactive">
+<script src="_static/pretext/js/lib/jquery.min.js"></script><script src="_static/pretext/js/lib/jquery.sticky.js"></script><script src="_static/pretext/js/lib/jquery.espy.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><script src="_static/pretext/js/user_preferences.js"></script><!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '8.2.5';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.18d8728f6d56e11d.bundle.js"></script><script src="_static/prefix-926.5c7038c8ef173faf.bundle.js"></script><script src="_static/prefix-runestone.b388362b5f43738a.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-926.229729d09512acc9.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.8086b62682b271d1.css">
+<script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script>
+</head>
+<body id="pswadsup" class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner">
+<a id="logo-link" class="logo-link" target="_blank" href="https://runestone.academy"><img src="external/cover.jpg" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="pythonds.html"><span class="title">ITSC 1213 - Python Problem Solving and Data Structures-lite.</span> <span class="subtitle">The Interactive Edition</span></a></h1>
+<p class="byline">Assembled by Adam Whaley, Original Text: How to Think like a Computer Scientist., Original Text: Problem Solving with Algorithms and Data Structures, Original Text: Python for Everybody - Interactive</p>
+</div>
+</div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><a class="index-button button" href="pythonds-12-1.html" title="Index"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span><span class="name">Index</span></a><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="basic-ds_queue-simulation-hot-potato.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="basic-data-structures.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="basic-ds_deques.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth2 focused" data-preexpanded-levels="0" data-max-levels="2"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter"><div class="toc-title-box"><a href="pythonds-3.html" class="internal"><span class="title">Front Matter</span></a></div></li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="basic-data-structures.html" class="internal"><span class="codenumber">1</span> <span class="title">Basic Data Structures</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_objectives.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Objectives</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_what-are-linear-structures.html" class="internal"><span class="codenumber">1.2</span> <span class="title">What Are Linear Structures?</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_stacks.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Stacks</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_the-stack-abstract-data-type.html" class="internal"><span class="codenumber">1.4</span> <span class="title">The Stack Abstract Data Type</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="basic-ds_implementing-a-stack-in-python.html" class="internal"><span class="codenumber">1.5</span> <span class="title">Implementing a Stack in Python</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="basic-ds_implementing-a-stack-in-python.html#basic-ds_implementing-a-stack-in-python-8" class="internal"><span class="codenumber">1.5</span> <span class="title">Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="basic-ds_implementing-a-stack-in-python.html#basic-ds_implementing-a-stack-in-python-13" class="internal"><span class="codenumber">1.5</span> <span class="title">Self Check</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_simple-balanced-parentheses.html" class="internal"><span class="codenumber">1.6</span> <span class="title">Simple Balanced Parentheses</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_balanced-symbols-a-general-case.html" class="internal"><span class="codenumber">1.7</span> <span class="title">Balanced Symbols (A General Case)</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="basic-ds_converting-decimal-numbers-to-binary-numbers.html" class="internal"><span class="codenumber">1.8</span> <span class="title">Converting Decimal Numbers to Binary Numbers</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="basic-ds_converting-decimal-numbers-to-binary-numbers.html#basic-ds_converting-decimal-numbers-to-binary-numbers-20" class="internal"><span class="codenumber">1.8</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="basic-ds_infix-prefix-and-postfix-expressions.html" class="internal"><span class="codenumber">1.9</span> <span class="title">Infix, Prefix, and Postfix Expressions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="basic-ds_infix-prefix-and-postfix-expressions.html#basic-ds_conversion-of-infix-expressions-to-prefix-and-postfix" class="internal"><span class="codenumber">1.9.1</span> <span class="title">Conversion of Infix Expressions to Prefix and Postfix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="basic-ds_infix-prefix-and-postfix-expressions.html#basic-ds_general-infix-to-postfix-conversion" class="internal"><span class="codenumber">1.9.2</span> <span class="title">General Infix-to-Postfix Conversion</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="basic-ds_infix-prefix-and-postfix-expressions.html#basic-ds_postfix-evaluation" class="internal"><span class="codenumber">1.9.3</span> <span class="title">Postfix Evaluation</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="basic-ds_infix-prefix-and-postfix-expressions.html#basic-ds_postfix-evaluation-14" class="internal"><span class="codenumber">1.9.3</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_queues.html" class="internal"><span class="codenumber">1.10</span> <span class="title">Queues</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_the-queue-abstract-data-type.html" class="internal"><span class="codenumber">1.11</span> <span class="title">The Queue Abstract Data Type</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="basic-ds_implementing-a-queue-in-python.html" class="internal"><span class="codenumber">1.12</span> <span class="title">Implementing a Queue in Python</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="basic-ds_implementing-a-queue-in-python.html#basic-ds_implementing-a-queue-in-python-9" class="internal"><span class="codenumber">1.12</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_queue-simulation-hot-potato.html" class="internal"><span class="codenumber">1.13</span> <span class="title">Queue Simulation: Hot Potato</span></a></div></li>
+<li class="toc-item toc-section contains-active">
+<div class="toc-title-box"><a href="basic-ds_queue-simulation-printing-tasks.html" class="internal"><span class="codenumber">1.14</span> <span class="title">Queue Simulation: Printing Tasks</span></a></div>
+<ul class="structural toc-item-list active">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="basic-ds_queue-simulation-printing-tasks.html#basic-ds_main-simulation-steps" class="internal"><span class="codenumber">1.14.1</span> <span class="title">Main Simulation Steps</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="basic-ds_queue-simulation-printing-tasks.html#basic-ds_python-implementation" class="internal"><span class="codenumber">1.14.2</span> <span class="title">Python Implementation</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="basic-ds_queue-simulation-printing-tasks.html#basic-ds_discussion" class="internal"><span class="codenumber">1.14.3</span> <span class="title">Discussion</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="basic-ds_queue-simulation-printing-tasks.html#basic-ds_discussion-8" class="internal"><span class="codenumber">1.14.3</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_deques.html" class="internal"><span class="codenumber">1.15</span> <span class="title">Deques</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_the-deque-abstract-data-type.html" class="internal"><span class="codenumber">1.16</span> <span class="title">The Deque Abstract Data Type</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_implementing-a-deque-in-python.html" class="internal"><span class="codenumber">1.17</span> <span class="title">Implementing a Deque in Python</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_palindrome-checker.html" class="internal"><span class="codenumber">1.18</span> <span class="title">Palindrome Checker</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_lists.html" class="internal"><span class="codenumber">1.19</span> <span class="title">Lists</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_the-unordered-list-abstract-data-type.html" class="internal"><span class="codenumber">1.20</span> <span class="title">The Unordered List Abstract Data Type</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="basic-ds_implementing-an-unordered-list-linked-lists.html" class="internal"><span class="codenumber">1.21</span> <span class="title">Implementing an Unordered List: Linked Lists</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="basic-ds_implementing-an-unordered-list-linked-lists.html#basic-ds_the-node-class" class="internal"><span class="codenumber">1.21.1</span> <span class="title">The <code class="code-inline tex2jax_ignore">Node</code> Class</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="basic-ds_implementing-an-unordered-list-linked-lists.html#basic-ds_the-unorderedlist-class" class="internal"><span class="codenumber">1.21.2</span> <span class="title">The <code class="code-inline tex2jax_ignore">UnorderedList</code> Class</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="basic-ds_implementing-an-unordered-list-linked-lists.html#basic-ds_the-unorderedlist-class-49" class="internal"><span class="codenumber">1.21.2</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_the-ordered-list-abstract-data-type.html" class="internal"><span class="codenumber">1.22</span> <span class="title">The Ordered List Abstract Data Type</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="basic-ds_implementing-an-ordered-list.html" class="internal"><span class="codenumber">1.23</span> <span class="title">Implementing an Ordered List</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="basic-ds_implementing-an-ordered-list.html#basic-ds_analysis-of-linked-lists" class="internal"><span class="codenumber">1.23.1</span> <span class="title">Analysis of Linked Lists</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_summary.html" class="internal"><span class="codenumber">1.24</span> <span class="title">Summary</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_key-terms.html" class="internal"><span class="codenumber">1.25</span> <span class="title">Key Terms</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="pythonds-5.html" class="internal"><span class="codenumber">2</span> <span class="title">Classes and Objects - the Basics</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="classes-basics_object-oriented-programming.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Object-oriented programming</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="classes-basics_a-change-of-perspective.html" class="internal"><span class="codenumber">2.2</span> <span class="title">A change of perspective</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="classes-basics_objects-revisited.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Objects Revisited</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="classes-basics_user-defined-classes.html" class="internal"><span class="codenumber">2.4</span> <span class="title">User Defined Classes</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="classes-basics_improving-our-constructor.html" class="internal"><span class="codenumber">2.5</span> <span class="title">Improving our Constructor</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="classes-basics_adding-other-methods-to-our-class.html" class="internal"><span class="codenumber">2.6</span> <span class="title">Adding Other Methods to our Class</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="classes-basics_objects-as-arguments-and-parameters.html" class="internal"><span class="codenumber">2.7</span> <span class="title">Objects as Arguments and Parameters</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="classes-basics_converting-an-object-to-a-string.html" class="internal"><span class="codenumber">2.8</span> <span class="title">Converting an Object to a String</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="classes-basics_instances-as-return-values.html" class="internal"><span class="codenumber">2.9</span> <span class="title">Instances as Return Values</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="classes-basics_glossary.html" class="internal"><span class="codenumber">2.10</span> <span class="title">Glossary</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-glossary"><div class="toc-title-box"><a href="classes-basics_glossary.html#classes-basics_glossary-2" class="internal"><span class="codenumber">2.10</span> <span class="title">Glossary</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="classes-basics_exercises.html" class="internal"><span class="codenumber">2.11</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-files.html" class="internal"><span class="codenumber">3</span> <span class="title">Files</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_persistence.html" class="internal"><span class="codenumber">3.1</span> <span class="title">Persistence</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_opening-files.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Opening files</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_text-files-and-lines.html" class="internal"><span class="codenumber">3.3</span> <span class="title">Text files and lines</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_reading-files.html" class="internal"><span class="codenumber">3.4</span> <span class="title">Reading files</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_searching-through-a-file.html" class="internal"><span class="codenumber">3.5</span> <span class="title">Searching through a file</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_letting-the-user-choose-the-file-name.html" class="internal"><span class="codenumber">3.6</span> <span class="title">Letting the user choose the file name</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_using-try-except-and-open.html" class="internal"><span class="codenumber">3.7</span> <span class="title">Using <code class="code-inline tex2jax_ignore">try, except,</code> and <code class="code-inline tex2jax_ignore">open</code></span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_writing-files.html" class="internal"><span class="codenumber">3.8</span> <span class="title">Writing files</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_debugging.html" class="internal"><span class="codenumber">3.9</span> <span class="title">Debugging</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_summary.html" class="internal"><span class="codenumber">3.10</span> <span class="title">Summary</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="files_multiple-choice-questions.html" class="internal"><span class="codenumber">3.11</span> <span class="title">Multiple Choice Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_mixed-up-code-questions.html" class="internal"><span class="codenumber">3.12</span> <span class="title">Mixed-up Code Questions</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="files_write-code-questions.html" class="internal"><span class="codenumber">3.13</span> <span class="title">Write Code Questions</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="files_group-work-reading-from-files.html" class="internal"><span class="codenumber">3.14</span> <span class="title">Group Work: Reading from Files</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="files_group-work-reading-from-files.html#files_reading-from-files" class="internal"><span class="codenumber">3.14.1</span> <span class="title">Reading from Files</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="files_group-work-reading-from-csv-files.html" class="internal"><span class="codenumber">3.15</span> <span class="title">Group Work: Reading from CSV Files</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="files_group-work-reading-from-csv-files.html#files_comma-separated-values-csv-files" class="internal"><span class="codenumber">3.15.1</span> <span class="title">Comma-Separated Values (CSV) Files</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="files_group-work-reading-from-csv-files.html#files_comma-separated-values-csv-files-with-a-header-row" class="internal"><span class="codenumber">3.15.2</span> <span class="title">Comma-Separated Values (CSV) Files with a Header Row</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="files_group-work-using-a-csv-reader-writer.html" class="internal"><span class="codenumber">3.16</span> <span class="title">Group Work: Using a CSV reader/writer</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="files_group-work-using-a-csv-reader-writer.html#files_csv-reader" class="internal"><span class="codenumber">3.16.1</span> <span class="title">CSV Reader</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="files_group-work-using-a-csv-reader-writer.html#files_reading-comma-separated-values-csv-files-with-a-header-row" class="internal"><span class="codenumber">3.16.2</span> <span class="title">Reading Comma-Separated Values (CSV) Files with a Header Row</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="files_group-work-using-a-csv-reader-writer.html#files_writing-a-comma-separated-values-csv-file-with-csv-writer" class="internal"><span class="codenumber">3.16.3</span> <span class="title">Writing a Comma-Separated Values (CSV) File with CSV Writer</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="pythonds-7.html" class="internal"><span class="codenumber">4</span> <span class="title">Functions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-that-return-values.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Functions that Return Values</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="functions_unit-testing.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Unit Testing</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="functions_unit-testing.html#functions_unit-testing-2" class="internal"><span class="codenumber">4.3.1</span> <span class="title">Introduction</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="functions_unit-testing.html#functions_assert-with-for-loops" class="internal"><span class="codenumber">4.3.2</span> <span class="title"><code class="code-inline tex2jax_ignore">assert</code> with <code class="code-inline tex2jax_ignore">for</code> loops</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="functions_unit-testing.html#functions_return-value-tests" class="internal"><span class="codenumber">4.3.3</span> <span class="title">Return Value Tests</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_variables-and-parameters-are-local.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Variables and Parameters are Local</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="functions_the-accumulator-pattern.html" class="internal"><span class="codenumber">4.5</span> <span class="title">The Accumulator Pattern</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="functions_the-accumulator-pattern.html#functions_the-accumulator-pattern-2" class="internal"><span class="codenumber">4.5.1</span> <span class="title">Introduction</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="functions_the-accumulator-pattern.html#functions_the-general-accumulator-pattern" class="internal"><span class="codenumber">4.5.2</span> <span class="title">The General Accumulator Pattern</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="functions_the-accumulator-pattern.html#functions_a-variation-on-the-accumulator-pattern" class="internal"><span class="codenumber">4.5.3</span> <span class="title">A Variation on the Accumulator Pattern</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-can-call-other-functions.html" class="internal"><span class="codenumber">4.6</span> <span class="title">Functions can Call Other Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_flow-of-execution-summary.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Flow of Execution Summary</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_using-a-main-function.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Using a Main Function</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_program-development.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Program Development</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_composition.html" class="internal"><span class="codenumber">4.10</span> <span class="title">Composition</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_a-turtle-bar-chart.html" class="internal"><span class="codenumber">4.11</span> <span class="title">A Turtle Bar Chart</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="functions_glossary.html" class="internal"><span class="codenumber">4.12</span> <span class="title">Glossary</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-glossary"><div class="toc-title-box"><a href="functions_glossary.html#functions_glossary-2" class="internal"><span class="codenumber">4.12</span> <span class="title">Glossary</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="functions_exercises.html" class="internal"><span class="codenumber">4.13</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="pythonds-8.html" class="internal"><span class="codenumber">5</span> <span class="title">Searching and Sorting</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sort-search_objectives.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Objectives</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sort-search_searching.html" class="internal"><span class="codenumber">5.2</span> <span class="title">Searching</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sort-search_the-sequential-search.html" class="internal"><span class="codenumber">5.3</span> <span class="title">The Sequential Search</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sort-search_the-sequential-search.html#sort-search_analysis-of-sequential-search" class="internal"><span class="codenumber">5.3.1</span> <span class="title">Analysis of Sequential Search</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sort-search_the-sequential-search.html#sort-search_analysis-of-sequential-search-12" class="internal"><span class="codenumber">5.3.1</span> <span class="title">Self Check</span></a></div></li></ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sort-search_the-binary-search.html" class="internal"><span class="codenumber">5.4</span> <span class="title">The Binary Search</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sort-search_the-binary-search.html#sort-search_analysis-of-binary-search" class="internal"><span class="codenumber">5.4.1</span> <span class="title">Analysis of Binary Search</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sort-search_the-binary-search.html#sort-search_analysis-of-binary-search-9" class="internal"><span class="codenumber">5.4.1</span> <span class="title">Self Check</span></a></div></li></ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sort-search_hashing.html" class="internal"><span class="codenumber">5.5</span> <span class="title">Hashing</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sort-search_hashing.html#sort-search_hash-functions" class="internal"><span class="codenumber">5.5.1</span> <span class="title">Hash Functions</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sort-search_hashing.html#sort-search_collision-resolution" class="internal"><span class="codenumber">5.5.2</span> <span class="title">Collision Resolution</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sort-search_hashing.html#sort-search_collision-resolution-18" class="internal"><span class="codenumber">5.5.2</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sort-search_hashing.html#sort-search_implementing-the-map-abstract-data-type" class="internal"><span class="codenumber">5.5.3</span> <span class="title">Implementing the Map Abstract Data Type</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sort-search_hashing.html#sort-search_analysis-of-hashing" class="internal"><span class="codenumber">5.5.4</span> <span class="title">Analysis of Hashing</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sort-search_sorting.html" class="internal"><span class="codenumber">5.6</span> <span class="title">Sorting</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sort-search_the-bubble-sort.html" class="internal"><span class="codenumber">5.7</span> <span class="title">The Bubble Sort</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sort-search_the-bubble-sort.html#sort-search_the-bubble-sort-20" class="internal"><span class="codenumber">5.7</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sort-search_the-selection-sort.html" class="internal"><span class="codenumber">5.8</span> <span class="title">The Selection Sort</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sort-search_the-selection-sort.html#sort-search_the-selection-sort-8" class="internal"><span class="codenumber">5.8</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sort-search_the-insertion-sort.html" class="internal"><span class="codenumber">5.9</span> <span class="title">The Insertion Sort</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sort-search_the-insertion-sort.html#sort-search_the-insertion-sort-12" class="internal"><span class="codenumber">5.9</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sort-search_the-shell-sort.html" class="internal"><span class="codenumber">5.10</span> <span class="title">The Shell Sort</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sort-search_the-shell-sort.html#sort-search_the-shell-sort-15" class="internal"><span class="codenumber">5.10</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sort-search_the-merge-sort.html" class="internal"><span class="codenumber">5.11</span> <span class="title">The Merge Sort</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sort-search_the-merge-sort.html#sort-search_the-merge-sort-13" class="internal"><span class="codenumber">5.11</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sort-search_the-quicksort.html" class="internal"><span class="codenumber">5.12</span> <span class="title">The Quicksort</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sort-search_the-quicksort.html#sort-search_the-quicksort-17" class="internal"><span class="codenumber">5.12</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sort-search_summary.html" class="internal"><span class="codenumber">5.13</span> <span class="title">Summary</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sort-search_key-terms.html" class="internal"><span class="codenumber">5.14</span> <span class="title">Key Terms</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="pythonds-9.html" class="internal"><span class="codenumber">6</span> <span class="title">Lists</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_lists.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Lists</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_list-values.html" class="internal"><span class="codenumber">6.2</span> <span class="title">List Values</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_list-length.html" class="internal"><span class="codenumber">6.3</span> <span class="title">List Length</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_accessing-elements.html" class="internal"><span class="codenumber">6.4</span> <span class="title">Accessing Elements</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_list-membership.html" class="internal"><span class="codenumber">6.5</span> <span class="title">List Membership</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_concatenation-and-repetition.html" class="internal"><span class="codenumber">6.6</span> <span class="title">Concatenation and Repetition</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_list-slices.html" class="internal"><span class="codenumber">6.7</span> <span class="title">List Slices</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_lists-are-mutable.html" class="internal"><span class="codenumber">6.8</span> <span class="title">Lists are Mutable</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_list-deletion.html" class="internal"><span class="codenumber">6.9</span> <span class="title">List Deletion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_objects-and-references.html" class="internal"><span class="codenumber">6.10</span> <span class="title">Objects and References</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_aliasing.html" class="internal"><span class="codenumber">6.11</span> <span class="title">Aliasing</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_cloning-lists.html" class="internal"><span class="codenumber">6.12</span> <span class="title">Cloning Lists</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_repetition-and-references.html" class="internal"><span class="codenumber">6.13</span> <span class="title">Repetition and References</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_list-methods.html" class="internal"><span class="codenumber">6.14</span> <span class="title">List Methods</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_the-return-of-l-systems.html" class="internal"><span class="codenumber">6.15</span> <span class="title">The Return of L-Systems</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_append-versus-concatenate.html" class="internal"><span class="codenumber">6.16</span> <span class="title">Append versus Concatenate</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_lists-and-for-loops.html" class="internal"><span class="codenumber">6.17</span> <span class="title">Lists and <code class="code-inline tex2jax_ignore">for</code> loops</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="lists_the-accumulator-pattern-with-lists.html" class="internal"><span class="codenumber">6.18</span> <span class="title">The Accumulator Pattern with Lists</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="lists_the-accumulator-pattern-with-lists.html#subsec-Introduction" class="internal"><span class="codenumber">6.18.1</span> <span class="title">Introduction</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="lists_the-accumulator-pattern-with-lists.html#lists_accumulating-the-max-value" class="internal"><span class="codenumber">6.18.2</span> <span class="title">Accumulating the Max Value</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="lists_the-accumulator-pattern-with-lists.html#lists_accumulating-a-string-result" class="internal"><span class="codenumber">6.18.3</span> <span class="title">Accumulating a String Result</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_using-lists-as-parameters.html" class="internal"><span class="codenumber">6.19</span> <span class="title">Using Lists as Parameters</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_pure-functions.html" class="internal"><span class="codenumber">6.20</span> <span class="title">Pure Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_which-is-better.html" class="internal"><span class="codenumber">6.21</span> <span class="title">Which is Better?</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_functions-that-produce-lists.html" class="internal"><span class="codenumber">6.22</span> <span class="title">Functions that Produce Lists</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_list-comprehensions.html" class="internal"><span class="codenumber">6.23</span> <span class="title">List Comprehensions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_nested-lists.html" class="internal"><span class="codenumber">6.24</span> <span class="title">Nested Lists</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_strings-and-lists.html" class="internal"><span class="codenumber">6.25</span> <span class="title">Strings and Lists</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_list-type-conversion-function.html" class="internal"><span class="codenumber">6.26</span> <span class="title">List - Type Conversion Function</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_tuples-and-mutability.html" class="internal"><span class="codenumber">6.27</span> <span class="title">Tuples and Mutability</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_tuple-assignment.html" class="internal"><span class="codenumber">6.28</span> <span class="title">Tuple Assignment</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_tuples-as-return-values.html" class="internal"><span class="codenumber">6.29</span> <span class="title">Tuples as Return Values</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="lists_glossary.html" class="internal"><span class="codenumber">6.30</span> <span class="title">Glossary</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-glossary"><div class="toc-title-box"><a href="lists_glossary.html#lists_glossary-2" class="internal"><span class="codenumber">6.30</span> <span class="title">Glossary</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="lists_exercises.html" class="internal"><span class="codenumber">6.31</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-functions.html" class="internal"><span class="codenumber">7</span> <span class="title">Functions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_function-calls.html" class="internal"><span class="codenumber">7.1</span> <span class="title">Function calls</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_built-in-functions.html" class="internal"><span class="codenumber">7.2</span> <span class="title">Built-in functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_type-conversion-functions.html" class="internal"><span class="codenumber">7.3</span> <span class="title">Type conversion functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_math-functions.html" class="internal"><span class="codenumber">7.4</span> <span class="title">Math functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_random-numbers.html" class="internal"><span class="codenumber">7.5</span> <span class="title">Random numbers</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_adding-new-functions.html" class="internal"><span class="codenumber">7.6</span> <span class="title">Adding new functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_definitions-and-uses.html" class="internal"><span class="codenumber">7.7</span> <span class="title">Definitions and uses</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_flow-of-execution.html" class="internal"><span class="codenumber">7.8</span> <span class="title">Flow of execution</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_parameters-and-arguments.html" class="internal"><span class="codenumber">7.9</span> <span class="title">Parameters and arguments</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_fruitful-functions-and-void-functions.html" class="internal"><span class="codenumber">7.10</span> <span class="title">Fruitful functions and void functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_why-functions.html" class="internal"><span class="codenumber">7.11</span> <span class="title">Why functions?</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_debugging.html" class="internal"><span class="codenumber">7.12</span> <span class="title">Debugging</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="functions_glossary.html" class="internal"><span class="codenumber">7.13</span> <span class="title">Glossary</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-glossary"><div class="toc-title-box"><a href="functions_glossary.html#functions_glossary-2" class="internal"><span class="codenumber">7.13</span> <span class="title">Glossary</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="functions_multiple-choice-questions.html" class="internal"><span class="codenumber">7.14</span> <span class="title">Multiple Choice Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_mixed-up-code-questions.html" class="internal"><span class="codenumber">7.15</span> <span class="title">Mixed-up Code Questions</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="functions_write-code-questions.html" class="internal"><span class="codenumber">7.16</span> <span class="title">Write Code Questions</span></a></div></li>
+<li class="toc-item toc-worksheet">
+<div class="toc-title-box"><a href="func-group.html" class="internal"><span class="codenumber">7.17</span> <span class="title">Group Work: Functions</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-section">
+<div class="toc-title-box"><a href="func-group.html#functions_group-work-functions" class="internal"><span class="codenumber">7.17.1</span> <span class="title">Learning Objectives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="func-group.html#functions_print-and-function-basics" class="internal"><span class="codenumber">7.17.1.1</span> <span class="title">Print and Function Basics</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="func-group.html#functions_parts-of-a-function-and-function-calls" class="internal"><span class="codenumber">7.17.1.2</span> <span class="title">Parts of a Function and Function Calls</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="func-group.html#functions_writing-function-calls" class="internal"><span class="codenumber">7.17.1.3</span> <span class="title">Writing Function Calls</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="func-group.html#functions_function-order" class="internal"><span class="codenumber">7.17.1.4</span> <span class="title">Function Order</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="func-group.html#functions_special-characters-and-keywords" class="internal"><span class="codenumber">7.17.1.5</span> <span class="title">Special Characters and Keywords</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-multiple-choice-questions.html" class="internal"><span class="codenumber">7.18</span> <span class="title">Functions Multiple Choice Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-mixed-up-code-questions.html" class="internal"><span class="codenumber">7.19</span> <span class="title">Functions Mixed-Up Code Questions</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="functions_functions-write-code-questions.html" class="internal"><span class="codenumber">7.20</span> <span class="title">Functions Write Code Questions</span></a></div></li>
+<li class="toc-item toc-worksheet">
+<div class="toc-title-box"><a href="func-string.html" class="internal"><span class="codenumber">7.21</span> <span class="title">Group Work: Functions and Strings</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-section">
+<div class="toc-title-box"><a href="func-string.html#functions_group-work-functions-and-strings" class="internal"><span class="codenumber">7.21.1</span> <span class="title">Learning Objectives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="func-string.html#functions_string-indices" class="internal"><span class="codenumber">7.21.1.1</span> <span class="title">String Indices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="func-string.html#functions_string-slices" class="internal"><span class="codenumber">7.21.1.2</span> <span class="title">String Slices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="func-string.html#functions_input-and-converting-between-strings-and-numbers" class="internal"><span class="codenumber">7.21.1.3</span> <span class="title">Input and Converting Between Strings and Numbers</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="func-string.html#functions_string-methods" class="internal"><span class="codenumber">7.21.1.4</span> <span class="title">String Methods</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-and-strings-multiple-choice-questions.html" class="internal"><span class="codenumber">7.22</span> <span class="title">Functions and Strings Multiple Choice Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-and-strings-mixed-up-code-questions.html" class="internal"><span class="codenumber">7.23</span> <span class="title">Functions and Strings Mixed-Up Code Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-and-strings-write-code-questions.html" class="internal"><span class="codenumber">7.24</span> <span class="title">Functions and Strings Write Code Questions</span></a></div></li>
+<li class="toc-item toc-worksheet">
+<div class="toc-title-box"><a href="funcWithCond.html" class="internal"><span class="codenumber">7.25</span> <span class="title">Group Work: Functions and Conditionals</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-section">
+<div class="toc-title-box"><a href="funcWithCond.html#functions_group-work-functions-and-conditionals" class="internal"><span class="codenumber">7.25.1</span> <span class="title">Learning Objectives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithCond.html#functions_basic-conditionals-and-tests" class="internal"><span class="codenumber">7.25.1.1</span> <span class="title">Basic Conditionals and Tests</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithCond.html#functions_logical-operators-and-complex-conditionals" class="internal"><span class="codenumber">7.25.1.2</span> <span class="title">Logical Operators and Complex Conditionals</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-and-conditionals-multiple-choice-questions.html" class="internal"><span class="codenumber">7.26</span> <span class="title">Functions and Conditionals Multiple Choice Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-and-conditionals-mixed-up-code-questions.html" class="internal"><span class="codenumber">7.27</span> <span class="title">Functions and Conditionals Mixed-Up Code Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-and-conditionals-write-code-questions.html" class="internal"><span class="codenumber">7.28</span> <span class="title">Functions and Conditionals Write Code Questions</span></a></div></li>
+<li class="toc-item toc-worksheet">
+<div class="toc-title-box"><a href="funcWithLists.html" class="internal"><span class="codenumber">7.29</span> <span class="title">Group Work: Functions and Lists</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-section">
+<div class="toc-title-box"><a href="funcWithLists.html#functions_group-work-functions-and-lists" class="internal"><span class="codenumber">7.29.1</span> <span class="title">Learning Objectives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithLists.html#functions_list-indexing" class="internal"><span class="codenumber">7.29.1.1</span> <span class="title">List Indexing</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithLists.html#functions_built-in-functions-that-work-on-lists" class="internal"><span class="codenumber">7.29.1.2</span> <span class="title">Built-in Functions That Work on Lists</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithLists.html#functions_list-methods" class="internal"><span class="codenumber">7.29.1.3</span> <span class="title">List Methods</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithLists.html#functions_using-the-slice-operator" class="internal"><span class="codenumber">7.29.1.4</span> <span class="title">Using the Slice Operator</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-with-lists-multiple-choice-questions.html" class="internal"><span class="codenumber">7.30</span> <span class="title">Functions with Lists Multiple Choice Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-and-lists-mixed-up-code-questions.html" class="internal"><span class="codenumber">7.31</span> <span class="title">Functions and Lists Mixed-Up Code Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-and-lists-write-code-questions.html" class="internal"><span class="codenumber">7.32</span> <span class="title">Functions and Lists Write Code Questions</span></a></div></li>
+<li class="toc-item toc-worksheet">
+<div class="toc-title-box"><a href="funcWithLoops.html" class="internal"><span class="codenumber">7.33</span> <span class="title">Group Work: Functions with Loops</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-section">
+<div class="toc-title-box"><a href="funcWithLoops.html#functions_group-work-functions-with-loops" class="internal"><span class="codenumber">7.33.1</span> <span class="title">Learning Objectives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithLoops.html#functions_the-for-each-loop" class="internal"><span class="codenumber">7.33.1.1</span> <span class="title">The For-Each Loop</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithLoops.html#functions_range-and-for" class="internal"><span class="codenumber">7.33.1.2</span> <span class="title">Range and For</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithLoops.html#functions_while-loops" class="internal"><span class="codenumber">7.33.1.3</span> <span class="title">While Loops</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-with-loops-multiple-choice-questions.html" class="internal"><span class="codenumber">7.34</span> <span class="title">Functions with Loops Multiple Choice Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-and-loops-mixed-up-code-questions.html" class="internal"><span class="codenumber">7.35</span> <span class="title">Functions and Loops Mixed-Up Code Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-and-loops-write-code-questions.html" class="internal"><span class="codenumber">7.36</span> <span class="title">Functions and Loops Write Code Questions</span></a></div></li>
+<li class="toc-item toc-worksheet">
+<div class="toc-title-box"><a href="funcWithTuplesAndDict.html" class="internal"><span class="codenumber">7.37</span> <span class="title">Group Work: Functions with Tuples and Dictionaries</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-section">
+<div class="toc-title-box"><a href="funcWithTuplesAndDict.html#functions_group-work-functions-with-tuples-and-dictionaries" class="internal"><span class="codenumber">7.37.1</span> <span class="title">Learning Objectives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithTuplesAndDict.html#functions_tuples" class="internal"><span class="codenumber">7.37.1.1</span> <span class="title">Tuples</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithTuplesAndDict.html#functions_tuples-are-immutable" class="internal"><span class="codenumber">7.37.1.2</span> <span class="title">Tuples are Immutable</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithTuplesAndDict.html#functions_dictionaries" class="internal"><span class="codenumber">7.37.1.3</span> <span class="title">Dictionaries</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-with-tuples-and-dictionaries-multiple-choice-questions.html" class="internal"><span class="codenumber">7.38</span> <span class="title">Functions with Tuples and Dictionaries Multiple Choice Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-with-tuples-and-dictionaries-mixed-up-code-questions.html" class="internal"><span class="codenumber">7.39</span> <span class="title">Functions with Tuples and Dictionaries Mixed-Up Code Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-with-tuples-and-dictionaries-write-code-questions.html" class="internal"><span class="codenumber">7.40</span> <span class="title">Functions with Tuples and Dictionaries Write Code Questions</span></a></div></li>
+<li class="toc-item toc-worksheet">
+<div class="toc-title-box"><a href="funcWithStrsAndConds.html" class="internal"><span class="codenumber">7.41</span> <span class="title">Group Work: Functions with Strings and Conditionals</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-section">
+<div class="toc-title-box"><a href="funcWithStrsAndConds.html#fsc_group-work-functions-with-strings-and-conditionals" class="internal"><span class="codenumber">7.41.1</span> <span class="title">Learning Objectives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithStrsAndConds.html#fsc_str_cond_funct_intro" class="internal"><span class="codenumber">7.41.1.1</span> <span class="title">Function Example</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithStrsAndConds.html#fsc_str_cond_string_def" class="internal"><span class="codenumber">7.41.1.2</span> <span class="title">String Definition</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithStrsAndConds.html#fsc_str_cond_string_index" class="internal"><span class="codenumber">7.41.1.3</span> <span class="title">String Indices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithStrsAndConds.html#fsc_string-slices" class="internal"><span class="codenumber">7.41.1.4</span> <span class="title">String Slices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithStrsAndConds.html#fsc_basic-conditionals-and-tests" class="internal"><span class="codenumber">7.41.1.5</span> <span class="title">Basic Conditionals and Tests</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithStrsAndConds.html#fsc_logical-operators-and-complex-conditionals" class="internal"><span class="codenumber">7.41.1.6</span> <span class="title">Logical Operators and Complex Conditionals</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-worksheet">
+<div class="toc-title-box"><a href="funcWithListsAmdLoops.html" class="internal"><span class="codenumber">7.42</span> <span class="title">Group Work: Functions with Lists and Loops</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-section">
+<div class="toc-title-box"><a href="funcWithListsAmdLoops.html#flal_group-work-functions-with-lists-and-loops" class="internal"><span class="codenumber">7.42.1</span> <span class="title">Learning Objectives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithListsAmdLoops.html#flal_list-indexing-and-slicing" class="internal"><span class="codenumber">7.42.1.1</span> <span class="title">List Indexing and Slicing</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithListsAmdLoops.html#flal_built-in-functions-that-work-on-lists" class="internal"><span class="codenumber">7.42.1.2</span> <span class="title">Built-in Functions That Work on Lists</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithListsAmdLoops.html#flal_list-methods" class="internal"><span class="codenumber">7.42.1.3</span> <span class="title">List Methods</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithListsAmdLoops.html#flal_the-for-each-loop" class="internal"><span class="codenumber">7.42.1.4</span> <span class="title">The For-Each Loop</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithListsAmdLoops.html#flal_range-and-for" class="internal"><span class="codenumber">7.42.1.5</span> <span class="title">Range and For</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithListsAmdLoops.html#flal_while-loops" class="internal"><span class="codenumber">7.42.1.6</span> <span class="title">While Loops</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="pythonds-11.html" class="internal"><span class="codenumber">8</span> <span class="title">Python Modules</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="python-modules_modules-and-getting-help.html" class="internal"><span class="codenumber">8.1</span> <span class="title">Modules and Getting Help</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="python-modules_more-about-using-modules.html" class="internal"><span class="codenumber">8.2</span> <span class="title">More About Using Modules</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="python-modules_the-math-module.html" class="internal"><span class="codenumber">8.3</span> <span class="title">The math module</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="python-modules_the-random-module.html" class="internal"><span class="codenumber">8.4</span> <span class="title">The random module</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="python-modules_creating-modules.html" class="internal"><span class="codenumber">8.5</span> <span class="title">Creating Modules</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="python-modules_glossary.html" class="internal"><span class="codenumber">8.6</span> <span class="title">Glossary</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-glossary"><div class="toc-title-box"><a href="python-modules_glossary.html#python-modules_glossary-2" class="internal"><span class="codenumber">8.6</span> <span class="title">Glossary</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="python-modules_exercises.html" class="internal"><span class="codenumber">8.7</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-backmatter">
+<div class="toc-title-box"><a href="pythonds-12.html" class="internal"><span class="title">Back Matter</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-index"><div class="toc-title-box"><a href="pythonds-12-1.html" class="internal"><span class="title">Index</span></a></div></li></ul>
+</li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="basic-ds_queue-simulation-printing-tasks"><h2 class="heading hide-type">
+<span class="type">Section</span><span class="space"> </span><span class="codenumber">1.14</span><span class="space"> </span><span class="title">Queue Simulation: Printing Tasks</span>
+</h2>
+<div class="para" id="basic-ds_queue-simulation-printing-tasks-2">A more interesting simulation allows us to study the behavior of the printing queue described earlier in this section. Recall that as students send printing tasks to the shared printer, the tasks are placed in a queue to be processed in a first come, first served manner. Many questions arise with this configuration. The most important of these might be whether the printer is capable of handling a certain amount of work. If it cannot, students will be waiting too long for printing and may miss their next class.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_queue-simulation-printing-tasks-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="basic-ds_queue-simulation-printing-tasks-3">Consider the following situation in a computer science laboratory. On any average day about 10 students are working in the lab at any given hour. These students typically print up to twice during that time, and the length of these tasks ranges from 1 to 20 pages. The printer in the lab is older, capable of processing 10 pages per minute of draft quality. The printer could be switched to give better quality, but then it would produce only five pages per minute. The slower printing speed could make students wait too long. What page rate should be used?<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_queue-simulation-printing-tasks-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="basic-ds_queue-simulation-printing-tasks-4">We could decide by building a simulation that models the laboratory. We will need to construct representations for students, printing tasks, and the printer (<a href="basic-ds_queue-simulation-printing-tasks.html#i104_id1fig-qulabsim" class="xref" data-knowl="./knowl/xref/i104_id1fig-qulabsim.html" data-reveal-label="Reveal" data-close-label="Close" title="Figure 1.14.1">Figure 1.14.1</a>). As students submit printing tasks, we will add them to a waiting list, a queue of print tasks attached to the printer. When the printer completes a task, it will look at the queue to see if there are any remaining tasks to process. Of interest for us is the average amount of time students will wait for their papers to be printed. This is equal to the average amount of time a task waits in the queue.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_queue-simulation-printing-tasks-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="figure figure-like" id="i104_id1fig-qulabsim"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="external/BasicDS/Figures/simulationsetup.png" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">1.14.1<span class="period">.</span></span><span class="space"> </span>Figure 4: Computer Science Laboratory Printing Queue<div class="autopermalink" data-description="Figure 1.14.1"><a href="#i104_id1fig-qulabsim" title="Copy heading and permalink for Figure 1.14.1">🔗</a></div></figcaption></figure><div class="para" id="basic-ds_queue-simulation-printing-tasks-6">To model this situation we need to use some probabilities. For example, students may print a paper from 1 to 20 pages in length. If each length from 1 to 20 is equally likely, the actual length for a print task can be simulated by using a random number between 1 and 20 inclusive. This means that there is equal chance of any length from 1 to 20 appearing.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_queue-simulation-printing-tasks-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="basic-ds_queue-simulation-printing-tasks-7">If there are 10 students in the lab and each prints twice, then there are 20 print tasks per hour on average. What is the chance that at any given second, a print task is going to be created? The way to answer this is to consider the ratio of tasks to time. Twenty tasks per hour means that on average there will be one task every 180 seconds:<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_queue-simulation-printing-tasks-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="basic-ds_queue-simulation-printing-tasks-8">
+<span class="process-math">\(\frac {20\ tasks}{1\ hour} \times \frac {1\ hour}  {60\ minutes} \times \frac {1\ minute} {60\ seconds}=\frac {1\ task} {180\ seconds}\)</span><div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_queue-simulation-printing-tasks-8" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="basic-ds_queue-simulation-printing-tasks-9">For every second we can simulate the chance that a print task occurs by generating a random number between 1 and 180 inclusive. If the number is 180, we say a task has been created. Note that it is possible that many tasks could be created in a row or we may wait quite a while for a task to appear. That is the nature of simulation. You want to simulate the real situation as closely as possible given that you know general parameters.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_queue-simulation-printing-tasks-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<section class="subsection" id="basic-ds_main-simulation-steps"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber">1.14.1</span><span class="space"> </span><span class="title">Main Simulation Steps</span>
+</h3>
+<div class="para" id="basic-ds_main-simulation-steps-2">Here is the main simulation.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_main-simulation-steps-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="basic-ds_main-simulation-steps-3">
+<ol class="decimal ol-marker-1" id="basic-ds_main-simulation-steps-3-1">
+<li id="basic-ds_main-simulation-steps-3-1-1">
+<div class="para" id="basic-ds_main-simulation-steps-3-1-1-1">Create a queue of print tasks. Each task will be given a timestamp upon its arrival. The queue is empty to start.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_main-simulation-steps-3-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 1"><a href="#basic-ds_main-simulation-steps-3-1-1" title="Copy heading and permalink for Item 1">🔗</a></div>
+</li>
+<li id="basic-ds_main-simulation-steps-3-1-2">
+<div class="para" id="basic-ds_main-simulation-steps-3-1-2-1">For each second (<code class="code-inline tex2jax_ignore">current_second</code>):<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_main-simulation-steps-3-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="basic-ds_main-simulation-steps-3-1-2-2">
+<ul class="disc" id="basic-ds_main-simulation-steps-3-1-2-2-1">
+<li id="basic-ds_main-simulation-steps-3-1-2-2-1-1">
+<div class="para" id="basic-ds_main-simulation-steps-3-1-2-2-1-1-1">Does a new print task get created? If so, add it to the queue with the <code class="code-inline tex2jax_ignore">current_second</code> as the timestamp.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_main-simulation-steps-3-1-2-2-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#basic-ds_main-simulation-steps-3-1-2-2-1-1" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="basic-ds_main-simulation-steps-3-1-2-2-1-2">
+<div class="para" id="basic-ds_main-simulation-steps-3-1-2-2-1-2-1">If the printer is not busy and if a task is waiting,<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_main-simulation-steps-3-1-2-2-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="basic-ds_main-simulation-steps-3-1-2-2-1-2-2">
+<ul class="circle" id="basic-ds_main-simulation-steps-3-1-2-2-1-2-2-1">
+<li id="basic-ds_main-simulation-steps-3-1-2-2-1-2-2-1-1">
+<div class="para" id="basic-ds_main-simulation-steps-3-1-2-2-1-2-2-1-1-1">Remove the next task from the print queue and assign it to the printer.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_main-simulation-steps-3-1-2-2-1-2-2-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#basic-ds_main-simulation-steps-3-1-2-2-1-2-2-1-1" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="basic-ds_main-simulation-steps-3-1-2-2-1-2-2-1-2">
+<div class="para" id="basic-ds_main-simulation-steps-3-1-2-2-1-2-2-1-2-1">Subtract the timestamp from the <code class="code-inline tex2jax_ignore">current_second</code> to compute the waiting time for that task.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_main-simulation-steps-3-1-2-2-1-2-2-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#basic-ds_main-simulation-steps-3-1-2-2-1-2-2-1-2" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="basic-ds_main-simulation-steps-3-1-2-2-1-2-2-1-3">
+<div class="para" id="basic-ds_main-simulation-steps-3-1-2-2-1-2-2-1-3-1">Append the waiting time for that task to a list for later processing.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_main-simulation-steps-3-1-2-2-1-2-2-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#basic-ds_main-simulation-steps-3-1-2-2-1-2-2-1-3" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="basic-ds_main-simulation-steps-3-1-2-2-1-2-2-1-4">
+<div class="para" id="basic-ds_main-simulation-steps-3-1-2-2-1-2-2-1-4-1">Based on the number of pages in the print task, figure out how much time will be required.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_main-simulation-steps-3-1-2-2-1-2-2-1-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#basic-ds_main-simulation-steps-3-1-2-2-1-2-2-1-4" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_main-simulation-steps-3-1-2-2-1-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#basic-ds_main-simulation-steps-3-1-2-2-1-2" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="basic-ds_main-simulation-steps-3-1-2-2-1-3">
+<div class="para" id="basic-ds_main-simulation-steps-3-1-2-2-1-3-1">The printer now does one second of printing if necessary. It also subtracts one second from the time required for that task.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_main-simulation-steps-3-1-2-2-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#basic-ds_main-simulation-steps-3-1-2-2-1-3" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="basic-ds_main-simulation-steps-3-1-2-2-1-4">
+<div class="para" id="basic-ds_main-simulation-steps-3-1-2-2-1-4-1">If the task has been completed, in other words the time required has reached zero, the printer is no longer busy.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_main-simulation-steps-3-1-2-2-1-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#basic-ds_main-simulation-steps-3-1-2-2-1-4" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_main-simulation-steps-3-1-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 2"><a href="#basic-ds_main-simulation-steps-3-1-2" title="Copy heading and permalink for Item 2">🔗</a></div>
+</li>
+<li id="basic-ds_main-simulation-steps-3-1-3">
+<div class="para" id="basic-ds_main-simulation-steps-3-1-3-1">After the simulation is complete, compute the average waiting time from the list of waiting times generated.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_main-simulation-steps-3-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item 3"><a href="#basic-ds_main-simulation-steps-3-1-3" title="Copy heading and permalink for Item 3">🔗</a></div>
+</li>
+</ol>
+<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_main-simulation-steps-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection 1.14.1: Main Simulation Steps"><a href="#basic-ds_main-simulation-steps" title="Copy heading and permalink for Subsection 1.14.1: Main Simulation Steps">🔗</a></div></section><section class="subsection" id="basic-ds_python-implementation"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber">1.14.2</span><span class="space"> </span><span class="title">Python Implementation</span>
+</h3>
+<div class="para" id="basic-ds_python-implementation-2">To design this simulation we will create classes for the three real-world objects described above: <code class="code-inline tex2jax_ignore">Printer</code>, <code class="code-inline tex2jax_ignore">Task</code>, and <code class="code-inline tex2jax_ignore">PrintQueue</code>.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_python-implementation-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="basic-ds_python-implementation-3">The <code class="code-inline tex2jax_ignore">Printer</code> class (<a href="basic-ds_queue-simulation-printing-tasks.html#basic-ds_lst-printer" class="xref" data-knowl="./knowl/xref/basic-ds_lst-printer.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 1.14.2">Listing 1.14.2</a>) will need to track whether it has a current task. If it does, then it is busy (lines 13–17) and the amount of time needed can be computed from the number of pages in the task. The constructor will also allow the pages-per-minute setting to be initialized. The <code class="code-inline tex2jax_ignore">tick</code> method decrements the internal timer and sets the printer to idle (line 11) if the task is completed.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_python-implementation-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="listing figure-like" id="basic-ds_lst-printer"><figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">1.14.2<span class="period">.</span></span><span class="space"> </span><div class="autopermalink" data-description="Listing 1.14.2"><a href="#basic-ds_lst-printer" title="Copy heading and permalink for Listing 1.14.2">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program"><code class="language-py">class Printer:
+    def __init__(self, ppm):
+        self.page_rate = ppm
+        self.current_task = None
+        self.time_remaining = 0
+
+    def tick(self):
+        if self.current_task is not None:
+            self.time_remaining = self.time_remaining - 1
+            if self.time_remaining &lt;= 0:
+                self.current_task = None
+
+    def busy(self):
+        return self.current_task is not None
+
+    def start_next(self, new_task):
+        self.current_task = new_task
+        self.time_remaining = new_task.get_pages() * 60 / self.page_rate
+</code></pre></div></div></figure><div class="para" id="basic-ds_python-implementation-5">The <code class="code-inline tex2jax_ignore">Task</code> class (<a href="basic-ds_queue-simulation-printing-tasks.html#basic-ds_lst-task" class="xref" data-knowl="./knowl/xref/basic-ds_lst-task.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 1.14.3">Listing 1.14.3</a>) will represent a single printing task. When the task is created, a random number generator will provide a length from 1 to 20 pages. We have chosen to use the <code class="code-inline tex2jax_ignore">randrange</code> function from the <code class="code-inline tex2jax_ignore">random</code> module.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_python-implementation-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program"><code class="language-py">&gt;&gt;&gt; import random
+&gt;&gt;&gt; random.randrange(1,21)
+18
+&gt;&gt;&gt; random.randrange(1,21)
+8
+&gt;&gt;&gt;
+</code></pre></div>
+<div class="para" id="basic-ds_python-implementation-7">Each task will also need to keep a timestamp to be used for computing waiting time. This timestamp will represent the time that the task was created and placed in the printer queue. The <code class="code-inline tex2jax_ignore">wait_time</code> method can then be used to retrieve the amount of time spent in the queue before printing begins.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_python-implementation-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="listing figure-like" id="basic-ds_lst-task"><figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">1.14.3<span class="period">.</span></span><span class="space"> </span><div class="autopermalink" data-description="Listing 1.14.3"><a href="#basic-ds_lst-task" title="Copy heading and permalink for Listing 1.14.3">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program"><code class="language-py">import random
+
+
+class Task:
+    def __init__(self, time):
+        self.timestamp = time
+        self.pages = random.randrange(1, 21)
+
+    def get_stamp(self):
+        return self.timestamp
+
+    def get_pages(self):
+        return self.pages
+
+    def wait_time(self, current_time):
+        return current_time - self.timestamp
+</code></pre></div></div></figure><div class="para" id="basic-ds_python-implementation-9">The main simulation (<a href="basic-ds_queue-simulation-printing-tasks.html#basic-ds_lst-qumainsim" class="xref" data-knowl="./knowl/xref/basic-ds_lst-qumainsim.html" data-reveal-label="Reveal" data-close-label="Close" title="Listing 1.14.4">Listing 1.14.4</a>) implements the algorithm described above. The <code class="code-inline tex2jax_ignore">print_queue</code> object is an instance of our existing queue ADT. A boolean helper function, <code class="code-inline tex2jax_ignore">new_print_task</code>, decides whether a new printing task has been created. We have again chosen to use the <code class="code-inline tex2jax_ignore">randrange</code> function from the <code class="code-inline tex2jax_ignore">random</code> module to return a random integer between 1 and 180. Print tasks arrive once every 180 seconds. By arbitrarily choosing 180 from the range of random integers (line 31), we can simulate this random event. The simulation function allows us to set the total time and the pages per minute for the printer.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_python-implementation-9" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<figure class="listing figure-like" id="basic-ds_lst-qumainsim"><figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">1.14.4<span class="period">.</span></span><span class="space"> </span><div class="autopermalink" data-description="Listing 1.14.4"><a href="#basic-ds_lst-qumainsim" title="Copy heading and permalink for Listing 1.14.4">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program"><code class="language-py">import random
+from pythonds3.basic.queue Queue
+
+
+def simulation(num_seconds, pages_per_minute):
+    lab_printer = Printer(pages_per_minute)
+    print_queue = Queue()
+    waiting_times = []
+
+    for current_second in range(num_seconds):
+        if new_print_task():
+            task = Task(current_second)
+            print_queue.enqueue(task)
+
+        if (not lab_printer.busy()) and (not print_queue.is_empty()):
+            nexttask = print_queue.dequeue()
+            waiting_times.append(nexttask.wait_time(current_second))
+            lab_printer.start_next(nexttask)
+
+        lab_printer.tick()
+
+    average_wait = sum(waiting_times) / len(waiting_times)
+    print(
+        f"Average Wait {average_wait:6.2f} secs" \
+        + f"{print_queue.size():3d} tasks remaining."
+    )
+
+
+def new_print_task():
+    num = random.randrange(1, 181)
+    return num == 180
+
+
+for i in range(10):
+    simulation(3600, 5)
+</code></pre></div></div></figure><div class="para" id="basic-ds_python-implementation-11">When we run the simulation, we should not be concerned that the results are different each time. This is due to the probabilistic nature of the random numbers. We are interested in the trends that may be occurring as the parameters to the simulation are adjusted. Here are some results.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_python-implementation-11" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="basic-ds_python-implementation-12">First, we will run the simulation for a period of 60 minutes (3,600 seconds) using a page rate of five pages per minute. In addition, we will run 10 independent trials. Remember that because the simulation works with random numbers each run will return different results.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_python-implementation-12" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program"><code class="language-py">&gt;&gt;&gt; for i in range(10):
+...     simulation(3600, 5)
+...
+Average Wait 165.38 secs 2 tasks remaining.
+Average Wait  95.07 secs 1 tasks remaining.
+Average Wait  65.05 secs 2 tasks remaining.
+Average Wait  99.74 secs 1 tasks remaining.
+Average Wait  17.27 secs 0 tasks remaining.
+Average Wait 239.61 secs 5 tasks remaining.
+Average Wait  75.11 secs 1 tasks remaining.
+Average Wait  48.33 secs 0 tasks remaining.
+Average Wait  39.31 secs 3 tasks remaining.
+Average Wait 376.05 secs 1 tasks remaining.
+&gt;&gt;&gt;
+</code></pre></div>
+<div class="para" id="basic-ds_python-implementation-14">After running our 10 trials we can see that the mean average wait time is (165.38 + 95.07 + 65.05 + 99.74 + 17.27 + 239.61 + 75.11 + 48.33 + 39.31 + 376.05) / 10 = 122.09 seconds. You can also see that there is a large variation in the average wait time with a minimum average of 17.27 seconds and a maximum of 376.05 seconds. You may also notice that in only two of the cases were all the tasks completed.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_python-implementation-14" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="basic-ds_python-implementation-15">Now we will adjust the page rate to 10 pages per minute and run the 10 trials again. With a faster page rate, our hope would be that more tasks would be completed in the one-hour time frame.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_python-implementation-15" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="code-box"><pre class="program"><code class="language-py">&gt;&gt;&gt; for i in range(10):
+...     simulation(3600, 10)
+...
+Average Wait   1.29 secs 0 tasks remaining.
+Average Wait   7.00 secs 0 tasks remaining.
+Average Wait  28.96 secs 1 tasks remaining.
+Average Wait  13.55 secs 0 tasks remaining.
+Average Wait  12.67 secs 0 tasks remaining.
+Average Wait   6.46 secs 0 tasks remaining.
+Average Wait  22.33 secs 0 tasks remaining.
+Average Wait  12.39 secs 0 tasks remaining.
+Average Wait   7.27 secs 0 tasks remaining.
+Average Wait  18.17 secs 0 tasks remaining.
+&gt;&gt;&gt;
+</code></pre></div>
+<div class="para" id="basic-ds_python-implementation-17">You can run the simulation for yourself in ActiveCode 2.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_python-implementation-17" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="ptx-runestone-container"><div class="runestone explainer ac_section "><div data-component="activecode" id="rs-qumainsim"><textarea data-lang="python" data-audio="" data-coach="true" style="visibility: hidden;" id="rs-qumainsim_editor" data-question_label="" data-codelens="true" data-timelimit="25000">import random
+from pythonds3.basic import Queue
+
+
+class Printer:
+    def __init__(self, ppm):
+        self.page_rate = ppm
+        self.current_task = None
+        self.time_remaining = 0
+
+    def tick(self):
+        if self.current_task is not None:
+            self.time_remaining = self.time_remaining - 1
+            if self.time_remaining &lt;= 0:
+                self.current_task = None
+
+    def busy(self):
+        return self.current_task is not None
+
+    def start_next(self, new_task):
+        self.current_task = new_task
+        self.time_remaining = new_task.get_pages() * 60 / self.page_rate
+
+
+class Task:
+    def __init__(self, time):
+        self.timestamp = time
+        self.pages = random.randrange(1, 21)
+
+    def get_stamp(self):
+        return self.timestamp
+
+    def get_pages(self):
+        return self.pages
+
+    def wait_time(self, current_time):
+        return current_time - self.timestamp
+
+
+def simulation(num_seconds, pages_per_minute):
+    lab_printer = Printer(pages_per_minute)
+    print_queue = Queue()
+    waiting_times = []
+
+    for current_second in range(num_seconds):
+        if new_print_task():
+            task = Task(current_second)
+            print_queue.enqueue(task)
+
+        if (not lab_printer.busy()) and (not print_queue.is_empty()):
+            nexttask = print_queue.dequeue()
+            waiting_times.append(nexttask.wait_time(current_second))
+            lab_printer.start_next(nexttask)
+
+        lab_printer.tick()
+
+    average_wait = sum(waiting_times) / len(waiting_times)
+    print("Average Wait %6.2f secs %3d tasks remaining." % (average_wait, print_queue.size()))
+
+
+def new_print_task():
+    num = random.randrange(1, 181)
+    return num == 180
+
+
+for i in range(10):
+    simulation(3600, 5)
+</textarea></div></div></div>
+<div class="autopermalink" data-description="Subsection 1.14.2: Python Implementation"><a href="#basic-ds_python-implementation" title="Copy heading and permalink for Subsection 1.14.2: Python Implementation">🔗</a></div></section><section class="subsection" id="basic-ds_discussion"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber">1.14.3</span><span class="space"> </span><span class="title">Discussion</span>
+</h3>
+<div class="para" id="basic-ds_discussion-2">We were trying to answer a question about whether the current printer could handle the task load if it were set to print with a better quality but slower page rate. The approach we took was to write a simulation that modeled the printing tasks as random events of various lengths and arrival times.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_discussion-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="basic-ds_discussion-3">The output above shows that with 5 pages per minute printing, the average waiting time varied from a low of 17 seconds to a high of 376 seconds (about 6 minutes). With a faster printing rate, the low value was 1 second with a high of only 28. In addition, in 8 out of 10 runs at 5 pages per minute there were print tasks still waiting in the queue at the end of the hour.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_discussion-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="basic-ds_discussion-4">Therefore, we are perhaps persuaded that slowing the printer down to get better quality may not be a good idea. Students cannot afford to wait that long for their papers, especially when they need to be getting on to their next class. A six-minute wait would simply be too long.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_discussion-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="basic-ds_discussion-5">This type of simulation analysis allows us to answer many questions, commonly known as what-if questions. All we need to do is vary the parameters used by the simulation and we can simulate any number of interesting behaviors. For example,<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_discussion-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="basic-ds_discussion-6">
+<ul class="disc" id="basic-ds_discussion-6-1">
+<li id="basic-ds_discussion-6-1-1">
+<div class="para" id="basic-ds_discussion-6-1-1-1">What if enrollment goes up and the average number of students increases by 20?<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_discussion-6-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#basic-ds_discussion-6-1-1" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="basic-ds_discussion-6-1-2">
+<div class="para" id="basic-ds_discussion-6-1-2-1">What if it is Saturday and students do not need to get to class? Can they afford to wait?<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_discussion-6-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#basic-ds_discussion-6-1-2" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="basic-ds_discussion-6-1-3">
+<div class="para" id="basic-ds_discussion-6-1-3-1">What if the size of the average print task decreases since Python is such a powerful language and programs tend to be much shorter?<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_discussion-6-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#basic-ds_discussion-6-1-3" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_discussion-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="basic-ds_discussion-7">These questions could all be answered by modifying the above simulation. However, it is important to remember that the simulation is only as good as the assumptions that are used to build it. Real data about the number of print tasks per hour and the number of students per hour was necessary to construct a robust simulation.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_discussion-7" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<section class="exercises" id="basic-ds_discussion-8"><h4 class="heading hide-type">
+<span class="type">Exercises</span><span class="space"> </span><span class="codenumber"></span><span class="space"> </span><span class="title">Self Check</span>
+</h4>
+<div class="para" id="basic-ds_discussion-8-2">How would you modify the printer simulation to reflect a larger number of students?  Suppose that the number of students was doubled.  You make need to make some reasonable assumptions about how this simulation was put together but what would you change?  Modify the code.  Also suppose that the length of the average print task was cut in half.  Change the code to reflect that change.  Finally How would you parametertize the number of students, rather than changing the code we would like to make the number of students a parameter of the simulation.<div class="autopermalink" data-description="Paragraph"><a href="#basic-ds_discussion-8-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="ptx-runestone-container"><div class="runestone explainer ac_section "><div data-component="activecode" id="rs-print_sim_selfcheck"><textarea data-lang="python" data-audio="" data-coach="true" style="visibility: hidden;" id="rs-print_sim_selfcheck_editor" data-question_label="" data-codelens="true" data-timelimit="25000">import random
+from pythonds3.basic import Queue
+
+
+class Printer:
+    def __init__(self, ppm):
+        self.page_rate = ppm
+        self.current_task = None
+        self.time_remaining = 0
+
+    def tick(self):
+        if self.current_task is not None:
+            self.time_remaining = self.time_remaining - 1
+            if self.time_remaining &lt;= 0:
+                self.current_task = None
+
+    def busy(self):
+        return self.current_task is not None
+
+    def start_next(self, new_task):
+        self.current_task = new_task
+        self.time_remaining = new_task.get_pages() * 60 / self.page_rate
+
+
+class Task:
+    def __init__(self, time):
+        self.timestamp = time
+        self.pages = random.randrange(1, 21)
+
+    def get_stamp(self):
+        return self.timestamp
+
+    def get_pages(self):
+        return self.pages
+
+    def wait_time(self, current_time):
+        return current_time - self.timestamp
+
+
+def simulation(num_seconds, pages_per_minute):
+    lab_printer = Printer(pages_per_minute)
+    print_queue = Queue()
+    waiting_times = []
+
+    for current_second in range(num_seconds):
+        if new_print_task():
+            task = Task(current_second)
+            print_queue.enqueue(task)
+
+        if (not lab_printer.busy()) and (not print_queue.is_empty()):
+            nexttask = print_queue.dequeue()
+            waiting_times.append(nexttask.wait_time(current_second))
+            lab_printer.start_next(nexttask)
+
+        lab_printer.tick()
+
+    average_wait = sum(waiting_times) / len(waiting_times)
+    print("Average Wait %6.2f secs %3d tasks remaining." % (average_wait, print_queue.size()))
+
+
+def new_print_task():
+    num = random.randrange(1, 181)
+    return num == 180
+
+
+for i in range(10):
+    simulation(3600, 5)
+</textarea></div></div></div>
+<div class="autopermalink" data-description="Exercises 1.14.3: Self Check"><a href="#basic-ds_discussion-8" title="Copy heading and permalink for Exercises 1.14.3: Self Check">🔗</a></div></section><div class="autopermalink" data-description="Subsection 1.14.3: Discussion"><a href="#basic-ds_discussion" title="Copy heading and permalink for Subsection 1.14.3: Discussion">🔗</a></div></section><div class="autopermalink" data-description="Section 1.14: Queue Simulation: Printing Tasks"><a href="#basic-ds_queue-simulation-printing-tasks" title="Copy heading and permalink for Section 1.14: Queue Simulation: Printing Tasks">🔗</a></div></section></div>
+<div id="ptx-content-footer" class="ptx-content-footer">
+<a class="previous-button button" href="basic-ds_queue-simulation-hot-potato.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="basic-ds_deques.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>

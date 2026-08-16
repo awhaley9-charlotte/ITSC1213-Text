@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<figure class="listing figure-like"><figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">5.7.5<span class="period">.</span></span><span class="space"> </span><div class="autopermalink" data-description="Listing 5.7.5"><a href="#lst-shortbubble" title="Copy heading and permalink for Listing 5.7.5">🔗</a></div></figcaption><div class="listing__contents"><div class="ptx-runestone-container"><div class="runestone explainer ac_section "><div data-component="activecode" id="rs-lst-shortbubble"><textarea data-lang="python" data-audio="" data-coach="true" style="visibility: hidden;" id="rs-lst-shortbubble_editor" data-question_label="" data-codelens="true" data-timelimit="25000">def bubble_sort_short(a_list):
+    for i in range(len(a_list) - 1, 0, -1):
+        exchanges = False
+        for j in range(i):
+            if a_list[j] &gt; a_list[j + 1]:
+                exchanges = True
+                a_list[j], a_list[j + 1] = a_list[j + 1], a_list[j]
+        if not exchanges:
+            break
+
+
+a_list = [20, 30, 40, 90, 50, 60, 70, 80, 100, 110]
+bubble_sort_short(a_list)
+print(a_list)
+</textarea></div></div></div></div></figure><span class="incontext"><a class="internal" href="sort-search_the-bubble-sort.html#lst-shortbubble">in-context</a></span>
+</body>
+</html>

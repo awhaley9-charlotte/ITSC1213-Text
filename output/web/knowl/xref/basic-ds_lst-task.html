@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<figure class="listing figure-like"><figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">1.14.3<span class="period">.</span></span><span class="space"> </span><div class="autopermalink" data-description="Listing 1.14.3"><a href="#basic-ds_lst-task" title="Copy heading and permalink for Listing 1.14.3">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program"><code class="language-py">import random
+
+
+class Task:
+    def __init__(self, time):
+        self.timestamp = time
+        self.pages = random.randrange(1, 21)
+
+    def get_stamp(self):
+        return self.timestamp
+
+    def get_pages(self):
+        return self.pages
+
+    def wait_time(self, current_time):
+        return current_time - self.timestamp
+</code></pre></div></div></figure><span class="incontext"><a class="internal" href="basic-ds_queue-simulation-printing-tasks.html#basic-ds_lst-task">in-context</a></span>
+</body>
+</html>

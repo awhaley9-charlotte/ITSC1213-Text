@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<figure class="listing figure-like"><figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">5.5.15<span class="period">.</span></span><span class="space"> </span><div class="autopermalink" data-description="Listing 5.5.15"><a href="#sort-search_lst-hashtablecodesearch" title="Copy heading and permalink for Listing 5.5.15">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program"><code class="language-py">def get(self, key):
+    start_slot = self.hash_function(key, len(self.slots))
+
+    position = start_slot
+    while self.slots[position] is not None:
+        if self.slots[position] == key:
+            return self.data[position]
+        else:
+            position = self.rehash(position, len(self.slots))
+            if position == start_slot:
+                return None
+
+def __getitem__(self, key):
+    return self.get(key)
+
+def __setitem__(self, key, data):
+    self.put(key, data)
+</code></pre></div></div></figure><span class="incontext"><a class="internal" href="sort-search_hashing.html#sort-search_lst-hashtablecodesearch">in-context</a></span>
+</body>
+</html>

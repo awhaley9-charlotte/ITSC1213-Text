@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<figure class="listing figure-like"><figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">1.7.1<span class="period">.</span></span><span class="space"> </span><div class="autopermalink" data-description="Listing 1.7.1"><a href="#lst-balcheck" title="Copy heading and permalink for Listing 1.7.1">🔗</a></div></figcaption><div class="listing__contents"><div class="ptx-runestone-container"><div class="runestone explainer ac_section "><div data-component="activecode" id="rs-lst-balcheck"><textarea data-lang="python" data-audio="" data-coach="true" style="visibility: hidden;" id="rs-lst-balcheck_editor" data-question_label="" data-codelens="true" data-timelimit="25000">from pythonds3.basic import Stack
+
+
+def balance_checker(symbol_string):
+    s = Stack()
+    for symbol in symbol_string:
+        if symbol in "([{":
+            s.push(symbol)
+        else:
+            if s.is_empty():
+                return False
+            else:
+                if not matches(s.pop(), symbol):
+                    return False
+
+    return s.is_empty()
+
+def matches(sym_left, sym_right):
+    all_lefts = "([{"
+    all_rights = ")]}"
+    return all_lefts.index(sym_left) == all_rights.index(sym_right)
+
+
+print(balance_checker('{({([][])}())}'))
+print(balance_checker('[{()]'))
+</textarea></div></div></div></div></figure><span class="incontext"><a class="internal" href="basic-ds_balanced-symbols-a-general-case.html#lst-balcheck">in-context</a></span>
+</body>
+</html>

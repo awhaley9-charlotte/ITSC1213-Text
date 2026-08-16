@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<figure class="listing figure-like"><figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">1.14.4<span class="period">.</span></span><span class="space"> </span><div class="autopermalink" data-description="Listing 1.14.4"><a href="#basic-ds_lst-qumainsim" title="Copy heading and permalink for Listing 1.14.4">🔗</a></div></figcaption><div class="listing__contents"><div class="code-box"><pre class="program"><code class="language-py">import random
+from pythonds3.basic.queue Queue
+
+
+def simulation(num_seconds, pages_per_minute):
+    lab_printer = Printer(pages_per_minute)
+    print_queue = Queue()
+    waiting_times = []
+
+    for current_second in range(num_seconds):
+        if new_print_task():
+            task = Task(current_second)
+            print_queue.enqueue(task)
+
+        if (not lab_printer.busy()) and (not print_queue.is_empty()):
+            nexttask = print_queue.dequeue()
+            waiting_times.append(nexttask.wait_time(current_second))
+            lab_printer.start_next(nexttask)
+
+        lab_printer.tick()
+
+    average_wait = sum(waiting_times) / len(waiting_times)
+    print(
+        f"Average Wait {average_wait:6.2f} secs" \
+        + f"{print_queue.size():3d} tasks remaining."
+    )
+
+
+def new_print_task():
+    num = random.randrange(1, 181)
+    return num == 180
+
+
+for i in range(10):
+    simulation(3600, 5)
+</code></pre></div></div></figure><span class="incontext"><a class="internal" href="basic-ds_queue-simulation-printing-tasks.html#basic-ds_lst-qumainsim">in-context</a></span>
+</body>
+</html>

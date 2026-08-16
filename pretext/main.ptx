@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pretext xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en-US">
+  <xi:include href="./bookinfo.ptx"/>
+  <book xml:id="pythonds" permid="dspy">
+    <title>ITSC 1213 - Python Problem Solving and Data Structures-lite.</title>
+    <subtitle>The Interactive Edition</subtitle>
+    <frontmatter>
+    <titlepage>
+	<author>
+     <personname>Assembled by Adam Whaley</personname>
+     <institution>UNC Charlotte</institution>
+     </author>
+    <author>
+     <personname>Original Text: How to Think like a Computer Scientist.</personname>
+
+     </author>
+     <author>
+     <personname>Original Text: Problem Solving with Algorithms and Data Structures</personname>
+     </author>
+     <author>
+     <personname>Original Text: Python for Everybody - Interactive</personname>
+     </author>
+    </titlepage>
+     <minilicense>
+      The online version of this work is made available under the Creative Commons Attribution, Share Alike, Non-Commercial license.<image source="by-nc-sa.png" width="20%" description="CC-BY-NC_SA" />
+      </minilicense>
+
+
+    </frontmatter>
+	<xi:include href="./functions/toctree.ptx"/>
+<xi:include href="./ClassesBasics/toctree.ptx"/>
+<xi:include href="./PythonModules/toctree.ptx"/>
+<xi:include href="./files/toctree.ptx"/>
+<xi:include href="./functions1/toctree.ptx"/>
+<xi:include href="./Lists/toctree.ptx"/>
+<xi:include href="./SortSearch/toctree.ptx"/>
+    <xi:include href="./BasicDS/toctree.ptx"/>
+
+<backmatter>
+      <index>
+        <index-list/>
+      </index>
+    </backmatter>
+  </book>
+</pretext>

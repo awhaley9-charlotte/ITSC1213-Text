@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<figure class="listing figure-like"><figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">5.8.2<span class="period">.</span></span><span class="space"> </span><div class="autopermalink" data-description="Listing 5.8.2"><a href="#lst-selectionsortcode" title="Copy heading and permalink for Listing 5.8.2">🔗</a></div></figcaption><div class="listing__contents"><div class="ptx-runestone-container"><div class="runestone explainer ac_section "><div data-component="activecode" id="rs-lst-selectionsortcode"><textarea data-lang="python" data-audio="" data-coach="true" style="visibility: hidden;" id="rs-lst-selectionsortcode_editor" data-question_label="" data-codelens="true" data-timelimit="25000">def selection_sort(a_list):
+    for i in range(len(a_list)):
+        mx_idx = 0
+        for j in range(len(a_list) - i):
+            if a_list[j] &gt; a_list[mx_idx]:
+                mx_idx = j
+        if mx_idx != len(a_list) - i - 1:
+            new_end = len(a_list) - i - 1
+            a_list[mx_idx], a_list[new_end] = a_list[new_end], a_list[mx_idx]
+            
+a_list = [54, 26, 93, 17, 77, 31, 44, 55, 20]
+selection_sort(a_list)
+print(a_list)
+</textarea></div></div></div></div></figure><span class="incontext"><a class="internal" href="sort-search_the-selection-sort.html#lst-selectionsortcode">in-context</a></span>
+</body>
+</html>

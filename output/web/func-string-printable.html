@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DS Group Work: Functions and Strings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<link href="_static/pretext/css/theme.css" media="screen" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/print-worksheet.css" media="print" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/ol-markers.css" rel="stylesheet" type="text/css">
+<script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
+  },
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math"
+  },
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
+  },
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "_static/pretext/js/lib"
+    }
+  },
+  "startup": {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  }
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="ITSC 1213 - Python Problem Solving and Data Structures-lite.">
+<meta property="book:author" content="Assembled by Adam Whaley">
+<meta property="book:author" content="Original Text: How to Think like a Computer Scientist.">
+<meta property="book:author" content="Original Text: Problem Solving with Algorithms and Data Structures">
+<meta property="book:author" content="Original Text: Python for Everybody - Interactive">
+<script src="_static/pretext/js/lib/jquery.min.js"></script><script src="_static/pretext/js/lib/jquery.sticky.js"></script><script src="_static/pretext/js/lib/jquery.espy.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><script src="_static/pretext/js/user_preferences.js"></script><!--** eBookCongig is necessary to configure interactive       **-->
+<!--** Runestone components to run locally in reader's browser **-->
+<!--** No external communication:                              **-->
+<!--**     log level is 0, Runestone Services are disabled     **-->
+<script type="text/javascript">
+eBookConfig = {};
+eBookConfig.useRunestoneServices = false;
+eBookConfig.host = 'http://127.0.0.1:8000';
+eBookConfig.course = 'PTX_Course_Title_Here';
+eBookConfig.basecourse = 'PTX_Base_Course';
+eBookConfig.isLoggedIn = false;
+eBookConfig.email = '';
+eBookConfig.isInstructor = false;
+eBookConfig.logLevel = 0;
+eBookConfig.username = '';
+eBookConfig.readings = null;
+eBookConfig.activities = null;
+eBookConfig.downloadsEnabled = false;
+eBookConfig.allow_pairs = false;
+eBookConfig.enableScratchAC = false;
+eBookConfig.build_info = "";
+eBookConfig.python3 = null;
+eBookConfig.runestone_version = '8.2.5';
+eBookConfig.jobehost = '';
+eBookConfig.proxyuri_runs = '';
+eBookConfig.proxyuri_files = '';
+eBookConfig.enable_chatcodes =  false;
+</script>
+<!--*** Runestone Services ***-->
+<script src="_static/prefix-runtime.18d8728f6d56e11d.bundle.js"></script><script src="_static/prefix-926.5c7038c8ef173faf.bundle.js"></script><script src="_static/prefix-runestone.b388362b5f43738a.bundle.js"></script><link rel="stylesheet" type="text/css" href="_static/prefix-926.229729d09512acc9.css">
+<link rel="stylesheet" type="text/css" href="_static/prefix-runestone.8086b62682b271d1.css">
+<script src="_static/pretext/js/lti_iframe_resizer.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script>
+</head>
+<body id="pswadsup" class="pretext book ignore-math standalone worksheet letter">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner">
+<a id="logo-link" class="logo-link" target="_blank" href="https://runestone.academy"><img src="external/cover.jpg" alt="Logo image"></a><div class="title-container">
+<h1 class="heading"><a href="pythonds.html"><span class="title">ITSC 1213 - Python Problem Solving and Data Structures-lite.</span> <span class="subtitle">The Interactive Edition</span></a></h1>
+<p class="byline">Assembled by Adam Whaley, Original Text: How to Think like a Computer Scientist., Original Text: Problem Solving with Algorithms and Data Structures, Original Text: Python for Everybody - Interactive</p>
+</div>
+</div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><div class="ptx-navbar-contents">
+<button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><a class="index-button button" href="pythonds-12-1.html" title="Index"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe88e;</span><span class="name">Index</span></a><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
+</div>
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"><button id="light-dark-button" class="light-dark-button button" title="Dark Mode"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe51c;</span><span class="name">Dark Mode</span></button></span><span class="treebuttons"><a class="previous-button button" href="functions_functions-write-code-questions.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="ch-functions.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="functions_functions-and-strings-multiple-choice-questions.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span>
+</div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth2 focused" data-preexpanded-levels="0" data-max-levels="2"><ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-frontmatter"><div class="toc-title-box"><a href="pythonds-3.html" class="internal"><span class="title">Front Matter</span></a></div></li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="basic-data-structures.html" class="internal"><span class="codenumber">1</span> <span class="title">Basic Data Structures</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_objectives.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Objectives</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_what-are-linear-structures.html" class="internal"><span class="codenumber">1.2</span> <span class="title">What Are Linear Structures?</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_stacks.html" class="internal"><span class="codenumber">1.3</span> <span class="title">Stacks</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_the-stack-abstract-data-type.html" class="internal"><span class="codenumber">1.4</span> <span class="title">The Stack Abstract Data Type</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="basic-ds_implementing-a-stack-in-python.html" class="internal"><span class="codenumber">1.5</span> <span class="title">Implementing a Stack in Python</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="basic-ds_implementing-a-stack-in-python.html#basic-ds_implementing-a-stack-in-python-8" class="internal"><span class="codenumber">1.5</span> <span class="title">Exercises</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="basic-ds_implementing-a-stack-in-python.html#basic-ds_implementing-a-stack-in-python-13" class="internal"><span class="codenumber">1.5</span> <span class="title">Self Check</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_simple-balanced-parentheses.html" class="internal"><span class="codenumber">1.6</span> <span class="title">Simple Balanced Parentheses</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_balanced-symbols-a-general-case.html" class="internal"><span class="codenumber">1.7</span> <span class="title">Balanced Symbols (A General Case)</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="basic-ds_converting-decimal-numbers-to-binary-numbers.html" class="internal"><span class="codenumber">1.8</span> <span class="title">Converting Decimal Numbers to Binary Numbers</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="basic-ds_converting-decimal-numbers-to-binary-numbers.html#basic-ds_converting-decimal-numbers-to-binary-numbers-20" class="internal"><span class="codenumber">1.8</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="basic-ds_infix-prefix-and-postfix-expressions.html" class="internal"><span class="codenumber">1.9</span> <span class="title">Infix, Prefix, and Postfix Expressions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="basic-ds_infix-prefix-and-postfix-expressions.html#basic-ds_conversion-of-infix-expressions-to-prefix-and-postfix" class="internal"><span class="codenumber">1.9.1</span> <span class="title">Conversion of Infix Expressions to Prefix and Postfix</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="basic-ds_infix-prefix-and-postfix-expressions.html#basic-ds_general-infix-to-postfix-conversion" class="internal"><span class="codenumber">1.9.2</span> <span class="title">General Infix-to-Postfix Conversion</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="basic-ds_infix-prefix-and-postfix-expressions.html#basic-ds_postfix-evaluation" class="internal"><span class="codenumber">1.9.3</span> <span class="title">Postfix Evaluation</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="basic-ds_infix-prefix-and-postfix-expressions.html#basic-ds_postfix-evaluation-14" class="internal"><span class="codenumber">1.9.3</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_queues.html" class="internal"><span class="codenumber">1.10</span> <span class="title">Queues</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_the-queue-abstract-data-type.html" class="internal"><span class="codenumber">1.11</span> <span class="title">The Queue Abstract Data Type</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="basic-ds_implementing-a-queue-in-python.html" class="internal"><span class="codenumber">1.12</span> <span class="title">Implementing a Queue in Python</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="basic-ds_implementing-a-queue-in-python.html#basic-ds_implementing-a-queue-in-python-9" class="internal"><span class="codenumber">1.12</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_queue-simulation-hot-potato.html" class="internal"><span class="codenumber">1.13</span> <span class="title">Queue Simulation: Hot Potato</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="basic-ds_queue-simulation-printing-tasks.html" class="internal"><span class="codenumber">1.14</span> <span class="title">Queue Simulation: Printing Tasks</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="basic-ds_queue-simulation-printing-tasks.html#basic-ds_main-simulation-steps" class="internal"><span class="codenumber">1.14.1</span> <span class="title">Main Simulation Steps</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="basic-ds_queue-simulation-printing-tasks.html#basic-ds_python-implementation" class="internal"><span class="codenumber">1.14.2</span> <span class="title">Python Implementation</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="basic-ds_queue-simulation-printing-tasks.html#basic-ds_discussion" class="internal"><span class="codenumber">1.14.3</span> <span class="title">Discussion</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="basic-ds_queue-simulation-printing-tasks.html#basic-ds_discussion-8" class="internal"><span class="codenumber">1.14.3</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_deques.html" class="internal"><span class="codenumber">1.15</span> <span class="title">Deques</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_the-deque-abstract-data-type.html" class="internal"><span class="codenumber">1.16</span> <span class="title">The Deque Abstract Data Type</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_implementing-a-deque-in-python.html" class="internal"><span class="codenumber">1.17</span> <span class="title">Implementing a Deque in Python</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_palindrome-checker.html" class="internal"><span class="codenumber">1.18</span> <span class="title">Palindrome Checker</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_lists.html" class="internal"><span class="codenumber">1.19</span> <span class="title">Lists</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_the-unordered-list-abstract-data-type.html" class="internal"><span class="codenumber">1.20</span> <span class="title">The Unordered List Abstract Data Type</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="basic-ds_implementing-an-unordered-list-linked-lists.html" class="internal"><span class="codenumber">1.21</span> <span class="title">Implementing an Unordered List: Linked Lists</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="basic-ds_implementing-an-unordered-list-linked-lists.html#basic-ds_the-node-class" class="internal"><span class="codenumber">1.21.1</span> <span class="title">The <code class="code-inline tex2jax_ignore">Node</code> Class</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="basic-ds_implementing-an-unordered-list-linked-lists.html#basic-ds_the-unorderedlist-class" class="internal"><span class="codenumber">1.21.2</span> <span class="title">The <code class="code-inline tex2jax_ignore">UnorderedList</code> Class</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="basic-ds_implementing-an-unordered-list-linked-lists.html#basic-ds_the-unorderedlist-class-49" class="internal"><span class="codenumber">1.21.2</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_the-ordered-list-abstract-data-type.html" class="internal"><span class="codenumber">1.22</span> <span class="title">The Ordered List Abstract Data Type</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="basic-ds_implementing-an-ordered-list.html" class="internal"><span class="codenumber">1.23</span> <span class="title">Implementing an Ordered List</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="basic-ds_implementing-an-ordered-list.html#basic-ds_analysis-of-linked-lists" class="internal"><span class="codenumber">1.23.1</span> <span class="title">Analysis of Linked Lists</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_summary.html" class="internal"><span class="codenumber">1.24</span> <span class="title">Summary</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="basic-ds_key-terms.html" class="internal"><span class="codenumber">1.25</span> <span class="title">Key Terms</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="pythonds-5.html" class="internal"><span class="codenumber">2</span> <span class="title">Classes and Objects - the Basics</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="classes-basics_object-oriented-programming.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Object-oriented programming</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="classes-basics_a-change-of-perspective.html" class="internal"><span class="codenumber">2.2</span> <span class="title">A change of perspective</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="classes-basics_objects-revisited.html" class="internal"><span class="codenumber">2.3</span> <span class="title">Objects Revisited</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="classes-basics_user-defined-classes.html" class="internal"><span class="codenumber">2.4</span> <span class="title">User Defined Classes</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="classes-basics_improving-our-constructor.html" class="internal"><span class="codenumber">2.5</span> <span class="title">Improving our Constructor</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="classes-basics_adding-other-methods-to-our-class.html" class="internal"><span class="codenumber">2.6</span> <span class="title">Adding Other Methods to our Class</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="classes-basics_objects-as-arguments-and-parameters.html" class="internal"><span class="codenumber">2.7</span> <span class="title">Objects as Arguments and Parameters</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="classes-basics_converting-an-object-to-a-string.html" class="internal"><span class="codenumber">2.8</span> <span class="title">Converting an Object to a String</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="classes-basics_instances-as-return-values.html" class="internal"><span class="codenumber">2.9</span> <span class="title">Instances as Return Values</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="classes-basics_glossary.html" class="internal"><span class="codenumber">2.10</span> <span class="title">Glossary</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-glossary"><div class="toc-title-box"><a href="classes-basics_glossary.html#classes-basics_glossary-2" class="internal"><span class="codenumber">2.10</span> <span class="title">Glossary</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="classes-basics_exercises.html" class="internal"><span class="codenumber">2.11</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-files.html" class="internal"><span class="codenumber">3</span> <span class="title">Files</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_persistence.html" class="internal"><span class="codenumber">3.1</span> <span class="title">Persistence</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_opening-files.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Opening files</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_text-files-and-lines.html" class="internal"><span class="codenumber">3.3</span> <span class="title">Text files and lines</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_reading-files.html" class="internal"><span class="codenumber">3.4</span> <span class="title">Reading files</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_searching-through-a-file.html" class="internal"><span class="codenumber">3.5</span> <span class="title">Searching through a file</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_letting-the-user-choose-the-file-name.html" class="internal"><span class="codenumber">3.6</span> <span class="title">Letting the user choose the file name</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_using-try-except-and-open.html" class="internal"><span class="codenumber">3.7</span> <span class="title">Using <code class="code-inline tex2jax_ignore">try, except,</code> and <code class="code-inline tex2jax_ignore">open</code></span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_writing-files.html" class="internal"><span class="codenumber">3.8</span> <span class="title">Writing files</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_debugging.html" class="internal"><span class="codenumber">3.9</span> <span class="title">Debugging</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_summary.html" class="internal"><span class="codenumber">3.10</span> <span class="title">Summary</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="files_multiple-choice-questions.html" class="internal"><span class="codenumber">3.11</span> <span class="title">Multiple Choice Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="files_mixed-up-code-questions.html" class="internal"><span class="codenumber">3.12</span> <span class="title">Mixed-up Code Questions</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="files_write-code-questions.html" class="internal"><span class="codenumber">3.13</span> <span class="title">Write Code Questions</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="files_group-work-reading-from-files.html" class="internal"><span class="codenumber">3.14</span> <span class="title">Group Work: Reading from Files</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection"><div class="toc-title-box"><a href="files_group-work-reading-from-files.html#files_reading-from-files" class="internal"><span class="codenumber">3.14.1</span> <span class="title">Reading from Files</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="files_group-work-reading-from-csv-files.html" class="internal"><span class="codenumber">3.15</span> <span class="title">Group Work: Reading from CSV Files</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="files_group-work-reading-from-csv-files.html#files_comma-separated-values-csv-files" class="internal"><span class="codenumber">3.15.1</span> <span class="title">Comma-Separated Values (CSV) Files</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="files_group-work-reading-from-csv-files.html#files_comma-separated-values-csv-files-with-a-header-row" class="internal"><span class="codenumber">3.15.2</span> <span class="title">Comma-Separated Values (CSV) Files with a Header Row</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="files_group-work-using-a-csv-reader-writer.html" class="internal"><span class="codenumber">3.16</span> <span class="title">Group Work: Using a CSV reader/writer</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="files_group-work-using-a-csv-reader-writer.html#files_csv-reader" class="internal"><span class="codenumber">3.16.1</span> <span class="title">CSV Reader</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="files_group-work-using-a-csv-reader-writer.html#files_reading-comma-separated-values-csv-files-with-a-header-row" class="internal"><span class="codenumber">3.16.2</span> <span class="title">Reading Comma-Separated Values (CSV) Files with a Header Row</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="files_group-work-using-a-csv-reader-writer.html#files_writing-a-comma-separated-values-csv-file-with-csv-writer" class="internal"><span class="codenumber">3.16.3</span> <span class="title">Writing a Comma-Separated Values (CSV) File with CSV Writer</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="pythonds-7.html" class="internal"><span class="codenumber">4</span> <span class="title">Functions</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-that-return-values.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Functions that Return Values</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="functions_unit-testing.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Unit Testing</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="functions_unit-testing.html#functions_unit-testing-2" class="internal"><span class="codenumber">4.3.1</span> <span class="title">Introduction</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="functions_unit-testing.html#functions_assert-with-for-loops" class="internal"><span class="codenumber">4.3.2</span> <span class="title"><code class="code-inline tex2jax_ignore">assert</code> with <code class="code-inline tex2jax_ignore">for</code> loops</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="functions_unit-testing.html#functions_return-value-tests" class="internal"><span class="codenumber">4.3.3</span> <span class="title">Return Value Tests</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_variables-and-parameters-are-local.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Variables and Parameters are Local</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="functions_the-accumulator-pattern.html" class="internal"><span class="codenumber">4.5</span> <span class="title">The Accumulator Pattern</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="functions_the-accumulator-pattern.html#functions_the-accumulator-pattern-2" class="internal"><span class="codenumber">4.5.1</span> <span class="title">Introduction</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="functions_the-accumulator-pattern.html#functions_the-general-accumulator-pattern" class="internal"><span class="codenumber">4.5.2</span> <span class="title">The General Accumulator Pattern</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="functions_the-accumulator-pattern.html#functions_a-variation-on-the-accumulator-pattern" class="internal"><span class="codenumber">4.5.3</span> <span class="title">A Variation on the Accumulator Pattern</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-can-call-other-functions.html" class="internal"><span class="codenumber">4.6</span> <span class="title">Functions can Call Other Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_flow-of-execution-summary.html" class="internal"><span class="codenumber">4.7</span> <span class="title">Flow of Execution Summary</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_using-a-main-function.html" class="internal"><span class="codenumber">4.8</span> <span class="title">Using a Main Function</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_program-development.html" class="internal"><span class="codenumber">4.9</span> <span class="title">Program Development</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_composition.html" class="internal"><span class="codenumber">4.10</span> <span class="title">Composition</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_a-turtle-bar-chart.html" class="internal"><span class="codenumber">4.11</span> <span class="title">A Turtle Bar Chart</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="functions_glossary.html" class="internal"><span class="codenumber">4.12</span> <span class="title">Glossary</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-glossary"><div class="toc-title-box"><a href="functions_glossary.html#functions_glossary-2" class="internal"><span class="codenumber">4.12</span> <span class="title">Glossary</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="functions_exercises.html" class="internal"><span class="codenumber">4.13</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="pythonds-8.html" class="internal"><span class="codenumber">5</span> <span class="title">Searching and Sorting</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sort-search_objectives.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Objectives</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sort-search_searching.html" class="internal"><span class="codenumber">5.2</span> <span class="title">Searching</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sort-search_the-sequential-search.html" class="internal"><span class="codenumber">5.3</span> <span class="title">The Sequential Search</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sort-search_the-sequential-search.html#sort-search_analysis-of-sequential-search" class="internal"><span class="codenumber">5.3.1</span> <span class="title">Analysis of Sequential Search</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sort-search_the-sequential-search.html#sort-search_analysis-of-sequential-search-12" class="internal"><span class="codenumber">5.3.1</span> <span class="title">Self Check</span></a></div></li></ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sort-search_the-binary-search.html" class="internal"><span class="codenumber">5.4</span> <span class="title">The Binary Search</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sort-search_the-binary-search.html#sort-search_analysis-of-binary-search" class="internal"><span class="codenumber">5.4.1</span> <span class="title">Analysis of Binary Search</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sort-search_the-binary-search.html#sort-search_analysis-of-binary-search-9" class="internal"><span class="codenumber">5.4.1</span> <span class="title">Self Check</span></a></div></li></ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sort-search_hashing.html" class="internal"><span class="codenumber">5.5</span> <span class="title">Hashing</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sort-search_hashing.html#sort-search_hash-functions" class="internal"><span class="codenumber">5.5.1</span> <span class="title">Hash Functions</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sort-search_hashing.html#sort-search_collision-resolution" class="internal"><span class="codenumber">5.5.2</span> <span class="title">Collision Resolution</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sort-search_hashing.html#sort-search_collision-resolution-18" class="internal"><span class="codenumber">5.5.2</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sort-search_hashing.html#sort-search_implementing-the-map-abstract-data-type" class="internal"><span class="codenumber">5.5.3</span> <span class="title">Implementing the Map Abstract Data Type</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sort-search_hashing.html#sort-search_analysis-of-hashing" class="internal"><span class="codenumber">5.5.4</span> <span class="title">Analysis of Hashing</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sort-search_sorting.html" class="internal"><span class="codenumber">5.6</span> <span class="title">Sorting</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sort-search_the-bubble-sort.html" class="internal"><span class="codenumber">5.7</span> <span class="title">The Bubble Sort</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sort-search_the-bubble-sort.html#sort-search_the-bubble-sort-20" class="internal"><span class="codenumber">5.7</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sort-search_the-selection-sort.html" class="internal"><span class="codenumber">5.8</span> <span class="title">The Selection Sort</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sort-search_the-selection-sort.html#sort-search_the-selection-sort-8" class="internal"><span class="codenumber">5.8</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sort-search_the-insertion-sort.html" class="internal"><span class="codenumber">5.9</span> <span class="title">The Insertion Sort</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sort-search_the-insertion-sort.html#sort-search_the-insertion-sort-12" class="internal"><span class="codenumber">5.9</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sort-search_the-shell-sort.html" class="internal"><span class="codenumber">5.10</span> <span class="title">The Shell Sort</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sort-search_the-shell-sort.html#sort-search_the-shell-sort-15" class="internal"><span class="codenumber">5.10</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sort-search_the-merge-sort.html" class="internal"><span class="codenumber">5.11</span> <span class="title">The Merge Sort</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sort-search_the-merge-sort.html#sort-search_the-merge-sort-13" class="internal"><span class="codenumber">5.11</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sort-search_the-quicksort.html" class="internal"><span class="codenumber">5.12</span> <span class="title">The Quicksort</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-exercises"><div class="toc-title-box"><a href="sort-search_the-quicksort.html#sort-search_the-quicksort-17" class="internal"><span class="codenumber">5.12</span> <span class="title">Self Check</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sort-search_summary.html" class="internal"><span class="codenumber">5.13</span> <span class="title">Summary</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sort-search_key-terms.html" class="internal"><span class="codenumber">5.14</span> <span class="title">Key Terms</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="pythonds-9.html" class="internal"><span class="codenumber">6</span> <span class="title">Lists</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_lists.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Lists</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_list-values.html" class="internal"><span class="codenumber">6.2</span> <span class="title">List Values</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_list-length.html" class="internal"><span class="codenumber">6.3</span> <span class="title">List Length</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_accessing-elements.html" class="internal"><span class="codenumber">6.4</span> <span class="title">Accessing Elements</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_list-membership.html" class="internal"><span class="codenumber">6.5</span> <span class="title">List Membership</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_concatenation-and-repetition.html" class="internal"><span class="codenumber">6.6</span> <span class="title">Concatenation and Repetition</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_list-slices.html" class="internal"><span class="codenumber">6.7</span> <span class="title">List Slices</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_lists-are-mutable.html" class="internal"><span class="codenumber">6.8</span> <span class="title">Lists are Mutable</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_list-deletion.html" class="internal"><span class="codenumber">6.9</span> <span class="title">List Deletion</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_objects-and-references.html" class="internal"><span class="codenumber">6.10</span> <span class="title">Objects and References</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_aliasing.html" class="internal"><span class="codenumber">6.11</span> <span class="title">Aliasing</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_cloning-lists.html" class="internal"><span class="codenumber">6.12</span> <span class="title">Cloning Lists</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_repetition-and-references.html" class="internal"><span class="codenumber">6.13</span> <span class="title">Repetition and References</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_list-methods.html" class="internal"><span class="codenumber">6.14</span> <span class="title">List Methods</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_the-return-of-l-systems.html" class="internal"><span class="codenumber">6.15</span> <span class="title">The Return of L-Systems</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_append-versus-concatenate.html" class="internal"><span class="codenumber">6.16</span> <span class="title">Append versus Concatenate</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_lists-and-for-loops.html" class="internal"><span class="codenumber">6.17</span> <span class="title">Lists and <code class="code-inline tex2jax_ignore">for</code> loops</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="lists_the-accumulator-pattern-with-lists.html" class="internal"><span class="codenumber">6.18</span> <span class="title">The Accumulator Pattern with Lists</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="lists_the-accumulator-pattern-with-lists.html#subsec-Introduction" class="internal"><span class="codenumber">6.18.1</span> <span class="title">Introduction</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="lists_the-accumulator-pattern-with-lists.html#lists_accumulating-the-max-value" class="internal"><span class="codenumber">6.18.2</span> <span class="title">Accumulating the Max Value</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="lists_the-accumulator-pattern-with-lists.html#lists_accumulating-a-string-result" class="internal"><span class="codenumber">6.18.3</span> <span class="title">Accumulating a String Result</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_using-lists-as-parameters.html" class="internal"><span class="codenumber">6.19</span> <span class="title">Using Lists as Parameters</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_pure-functions.html" class="internal"><span class="codenumber">6.20</span> <span class="title">Pure Functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_which-is-better.html" class="internal"><span class="codenumber">6.21</span> <span class="title">Which is Better?</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_functions-that-produce-lists.html" class="internal"><span class="codenumber">6.22</span> <span class="title">Functions that Produce Lists</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_list-comprehensions.html" class="internal"><span class="codenumber">6.23</span> <span class="title">List Comprehensions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_nested-lists.html" class="internal"><span class="codenumber">6.24</span> <span class="title">Nested Lists</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_strings-and-lists.html" class="internal"><span class="codenumber">6.25</span> <span class="title">Strings and Lists</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_list-type-conversion-function.html" class="internal"><span class="codenumber">6.26</span> <span class="title">List - Type Conversion Function</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_tuples-and-mutability.html" class="internal"><span class="codenumber">6.27</span> <span class="title">Tuples and Mutability</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_tuple-assignment.html" class="internal"><span class="codenumber">6.28</span> <span class="title">Tuple Assignment</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="lists_tuples-as-return-values.html" class="internal"><span class="codenumber">6.29</span> <span class="title">Tuples as Return Values</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="lists_glossary.html" class="internal"><span class="codenumber">6.30</span> <span class="title">Glossary</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-glossary"><div class="toc-title-box"><a href="lists_glossary.html#lists_glossary-2" class="internal"><span class="codenumber">6.30</span> <span class="title">Glossary</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="lists_exercises.html" class="internal"><span class="codenumber">6.31</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="ch-functions.html" class="internal"><span class="codenumber">7</span> <span class="title">Functions</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_function-calls.html" class="internal"><span class="codenumber">7.1</span> <span class="title">Function calls</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_built-in-functions.html" class="internal"><span class="codenumber">7.2</span> <span class="title">Built-in functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_type-conversion-functions.html" class="internal"><span class="codenumber">7.3</span> <span class="title">Type conversion functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_math-functions.html" class="internal"><span class="codenumber">7.4</span> <span class="title">Math functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_random-numbers.html" class="internal"><span class="codenumber">7.5</span> <span class="title">Random numbers</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_adding-new-functions.html" class="internal"><span class="codenumber">7.6</span> <span class="title">Adding new functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_definitions-and-uses.html" class="internal"><span class="codenumber">7.7</span> <span class="title">Definitions and uses</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_flow-of-execution.html" class="internal"><span class="codenumber">7.8</span> <span class="title">Flow of execution</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_parameters-and-arguments.html" class="internal"><span class="codenumber">7.9</span> <span class="title">Parameters and arguments</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_fruitful-functions-and-void-functions.html" class="internal"><span class="codenumber">7.10</span> <span class="title">Fruitful functions and void functions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_why-functions.html" class="internal"><span class="codenumber">7.11</span> <span class="title">Why functions?</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_debugging.html" class="internal"><span class="codenumber">7.12</span> <span class="title">Debugging</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="functions_glossary.html" class="internal"><span class="codenumber">7.13</span> <span class="title">Glossary</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-glossary"><div class="toc-title-box"><a href="functions_glossary.html#functions_glossary-2" class="internal"><span class="codenumber">7.13</span> <span class="title">Glossary</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="functions_multiple-choice-questions.html" class="internal"><span class="codenumber">7.14</span> <span class="title">Multiple Choice Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_mixed-up-code-questions.html" class="internal"><span class="codenumber">7.15</span> <span class="title">Mixed-up Code Questions</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="functions_write-code-questions.html" class="internal"><span class="codenumber">7.16</span> <span class="title">Write Code Questions</span></a></div></li>
+<li class="toc-item toc-worksheet">
+<div class="toc-title-box"><a href="func-group.html" class="internal"><span class="codenumber">7.17</span> <span class="title">Group Work: Functions</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-section">
+<div class="toc-title-box"><a href="func-group.html#functions_group-work-functions" class="internal"><span class="codenumber">7.17.1</span> <span class="title">Learning Objectives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="func-group.html#functions_print-and-function-basics" class="internal"><span class="codenumber">7.17.1.1</span> <span class="title">Print and Function Basics</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="func-group.html#functions_parts-of-a-function-and-function-calls" class="internal"><span class="codenumber">7.17.1.2</span> <span class="title">Parts of a Function and Function Calls</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="func-group.html#functions_writing-function-calls" class="internal"><span class="codenumber">7.17.1.3</span> <span class="title">Writing Function Calls</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="func-group.html#functions_function-order" class="internal"><span class="codenumber">7.17.1.4</span> <span class="title">Function Order</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="func-group.html#functions_special-characters-and-keywords" class="internal"><span class="codenumber">7.17.1.5</span> <span class="title">Special Characters and Keywords</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-multiple-choice-questions.html" class="internal"><span class="codenumber">7.18</span> <span class="title">Functions Multiple Choice Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-mixed-up-code-questions.html" class="internal"><span class="codenumber">7.19</span> <span class="title">Functions Mixed-Up Code Questions</span></a></div></li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="functions_functions-write-code-questions.html" class="internal"><span class="codenumber">7.20</span> <span class="title">Functions Write Code Questions</span></a></div></li>
+<li class="toc-item toc-worksheet contains-active">
+<div class="toc-title-box"><a href="func-string.html" class="internal"><span class="codenumber">7.21</span> <span class="title">Group Work: Functions and Strings</span></a></div>
+<ul class="structural toc-item-list active"><li class="toc-item toc-section">
+<div class="toc-title-box"><a href="func-string.html#functions_group-work-functions-and-strings" class="internal"><span class="codenumber">7.21.1</span> <span class="title">Learning Objectives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="func-string.html#functions_string-indices" class="internal"><span class="codenumber">7.21.1.1</span> <span class="title">String Indices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="func-string.html#functions_string-slices" class="internal"><span class="codenumber">7.21.1.2</span> <span class="title">String Slices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="func-string.html#functions_input-and-converting-between-strings-and-numbers" class="internal"><span class="codenumber">7.21.1.3</span> <span class="title">Input and Converting Between Strings and Numbers</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="func-string.html#functions_string-methods" class="internal"><span class="codenumber">7.21.1.4</span> <span class="title">String Methods</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-and-strings-multiple-choice-questions.html" class="internal"><span class="codenumber">7.22</span> <span class="title">Functions and Strings Multiple Choice Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-and-strings-mixed-up-code-questions.html" class="internal"><span class="codenumber">7.23</span> <span class="title">Functions and Strings Mixed-Up Code Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-and-strings-write-code-questions.html" class="internal"><span class="codenumber">7.24</span> <span class="title">Functions and Strings Write Code Questions</span></a></div></li>
+<li class="toc-item toc-worksheet">
+<div class="toc-title-box"><a href="funcWithCond.html" class="internal"><span class="codenumber">7.25</span> <span class="title">Group Work: Functions and Conditionals</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-section">
+<div class="toc-title-box"><a href="funcWithCond.html#functions_group-work-functions-and-conditionals" class="internal"><span class="codenumber">7.25.1</span> <span class="title">Learning Objectives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithCond.html#functions_basic-conditionals-and-tests" class="internal"><span class="codenumber">7.25.1.1</span> <span class="title">Basic Conditionals and Tests</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithCond.html#functions_logical-operators-and-complex-conditionals" class="internal"><span class="codenumber">7.25.1.2</span> <span class="title">Logical Operators and Complex Conditionals</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-and-conditionals-multiple-choice-questions.html" class="internal"><span class="codenumber">7.26</span> <span class="title">Functions and Conditionals Multiple Choice Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-and-conditionals-mixed-up-code-questions.html" class="internal"><span class="codenumber">7.27</span> <span class="title">Functions and Conditionals Mixed-Up Code Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-and-conditionals-write-code-questions.html" class="internal"><span class="codenumber">7.28</span> <span class="title">Functions and Conditionals Write Code Questions</span></a></div></li>
+<li class="toc-item toc-worksheet">
+<div class="toc-title-box"><a href="funcWithLists.html" class="internal"><span class="codenumber">7.29</span> <span class="title">Group Work: Functions and Lists</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-section">
+<div class="toc-title-box"><a href="funcWithLists.html#functions_group-work-functions-and-lists" class="internal"><span class="codenumber">7.29.1</span> <span class="title">Learning Objectives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithLists.html#functions_list-indexing" class="internal"><span class="codenumber">7.29.1.1</span> <span class="title">List Indexing</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithLists.html#functions_built-in-functions-that-work-on-lists" class="internal"><span class="codenumber">7.29.1.2</span> <span class="title">Built-in Functions That Work on Lists</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithLists.html#functions_list-methods" class="internal"><span class="codenumber">7.29.1.3</span> <span class="title">List Methods</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithLists.html#functions_using-the-slice-operator" class="internal"><span class="codenumber">7.29.1.4</span> <span class="title">Using the Slice Operator</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-with-lists-multiple-choice-questions.html" class="internal"><span class="codenumber">7.30</span> <span class="title">Functions with Lists Multiple Choice Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-and-lists-mixed-up-code-questions.html" class="internal"><span class="codenumber">7.31</span> <span class="title">Functions and Lists Mixed-Up Code Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-and-lists-write-code-questions.html" class="internal"><span class="codenumber">7.32</span> <span class="title">Functions and Lists Write Code Questions</span></a></div></li>
+<li class="toc-item toc-worksheet">
+<div class="toc-title-box"><a href="funcWithLoops.html" class="internal"><span class="codenumber">7.33</span> <span class="title">Group Work: Functions with Loops</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-section">
+<div class="toc-title-box"><a href="funcWithLoops.html#functions_group-work-functions-with-loops" class="internal"><span class="codenumber">7.33.1</span> <span class="title">Learning Objectives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithLoops.html#functions_the-for-each-loop" class="internal"><span class="codenumber">7.33.1.1</span> <span class="title">The For-Each Loop</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithLoops.html#functions_range-and-for" class="internal"><span class="codenumber">7.33.1.2</span> <span class="title">Range and For</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithLoops.html#functions_while-loops" class="internal"><span class="codenumber">7.33.1.3</span> <span class="title">While Loops</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-with-loops-multiple-choice-questions.html" class="internal"><span class="codenumber">7.34</span> <span class="title">Functions with Loops Multiple Choice Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-and-loops-mixed-up-code-questions.html" class="internal"><span class="codenumber">7.35</span> <span class="title">Functions and Loops Mixed-Up Code Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-and-loops-write-code-questions.html" class="internal"><span class="codenumber">7.36</span> <span class="title">Functions and Loops Write Code Questions</span></a></div></li>
+<li class="toc-item toc-worksheet">
+<div class="toc-title-box"><a href="funcWithTuplesAndDict.html" class="internal"><span class="codenumber">7.37</span> <span class="title">Group Work: Functions with Tuples and Dictionaries</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-section">
+<div class="toc-title-box"><a href="funcWithTuplesAndDict.html#functions_group-work-functions-with-tuples-and-dictionaries" class="internal"><span class="codenumber">7.37.1</span> <span class="title">Learning Objectives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithTuplesAndDict.html#functions_tuples" class="internal"><span class="codenumber">7.37.1.1</span> <span class="title">Tuples</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithTuplesAndDict.html#functions_tuples-are-immutable" class="internal"><span class="codenumber">7.37.1.2</span> <span class="title">Tuples are Immutable</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithTuplesAndDict.html#functions_dictionaries" class="internal"><span class="codenumber">7.37.1.3</span> <span class="title">Dictionaries</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-with-tuples-and-dictionaries-multiple-choice-questions.html" class="internal"><span class="codenumber">7.38</span> <span class="title">Functions with Tuples and Dictionaries Multiple Choice Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-with-tuples-and-dictionaries-mixed-up-code-questions.html" class="internal"><span class="codenumber">7.39</span> <span class="title">Functions with Tuples and Dictionaries Mixed-Up Code Questions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="functions_functions-with-tuples-and-dictionaries-write-code-questions.html" class="internal"><span class="codenumber">7.40</span> <span class="title">Functions with Tuples and Dictionaries Write Code Questions</span></a></div></li>
+<li class="toc-item toc-worksheet">
+<div class="toc-title-box"><a href="funcWithStrsAndConds.html" class="internal"><span class="codenumber">7.41</span> <span class="title">Group Work: Functions with Strings and Conditionals</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-section">
+<div class="toc-title-box"><a href="funcWithStrsAndConds.html#fsc_group-work-functions-with-strings-and-conditionals" class="internal"><span class="codenumber">7.41.1</span> <span class="title">Learning Objectives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithStrsAndConds.html#fsc_str_cond_funct_intro" class="internal"><span class="codenumber">7.41.1.1</span> <span class="title">Function Example</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithStrsAndConds.html#fsc_str_cond_string_def" class="internal"><span class="codenumber">7.41.1.2</span> <span class="title">String Definition</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithStrsAndConds.html#fsc_str_cond_string_index" class="internal"><span class="codenumber">7.41.1.3</span> <span class="title">String Indices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithStrsAndConds.html#fsc_string-slices" class="internal"><span class="codenumber">7.41.1.4</span> <span class="title">String Slices</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithStrsAndConds.html#fsc_basic-conditionals-and-tests" class="internal"><span class="codenumber">7.41.1.5</span> <span class="title">Basic Conditionals and Tests</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithStrsAndConds.html#fsc_logical-operators-and-complex-conditionals" class="internal"><span class="codenumber">7.41.1.6</span> <span class="title">Logical Operators and Complex Conditionals</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+<li class="toc-item toc-worksheet">
+<div class="toc-title-box"><a href="funcWithListsAmdLoops.html" class="internal"><span class="codenumber">7.42</span> <span class="title">Group Work: Functions with Lists and Loops</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-section">
+<div class="toc-title-box"><a href="funcWithListsAmdLoops.html#flal_group-work-functions-with-lists-and-loops" class="internal"><span class="codenumber">7.42.1</span> <span class="title">Learning Objectives</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithListsAmdLoops.html#flal_list-indexing-and-slicing" class="internal"><span class="codenumber">7.42.1.1</span> <span class="title">List Indexing and Slicing</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithListsAmdLoops.html#flal_built-in-functions-that-work-on-lists" class="internal"><span class="codenumber">7.42.1.2</span> <span class="title">Built-in Functions That Work on Lists</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithListsAmdLoops.html#flal_list-methods" class="internal"><span class="codenumber">7.42.1.3</span> <span class="title">List Methods</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithListsAmdLoops.html#flal_the-for-each-loop" class="internal"><span class="codenumber">7.42.1.4</span> <span class="title">The For-Each Loop</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithListsAmdLoops.html#flal_range-and-for" class="internal"><span class="codenumber">7.42.1.5</span> <span class="title">Range and For</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="funcWithListsAmdLoops.html#flal_while-loops" class="internal"><span class="codenumber">7.42.1.6</span> <span class="title">While Loops</span></a></div></li>
+</ul>
+</li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="pythonds-11.html" class="internal"><span class="codenumber">8</span> <span class="title">Python Modules</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="python-modules_modules-and-getting-help.html" class="internal"><span class="codenumber">8.1</span> <span class="title">Modules and Getting Help</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="python-modules_more-about-using-modules.html" class="internal"><span class="codenumber">8.2</span> <span class="title">More About Using Modules</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="python-modules_the-math-module.html" class="internal"><span class="codenumber">8.3</span> <span class="title">The math module</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="python-modules_the-random-module.html" class="internal"><span class="codenumber">8.4</span> <span class="title">The random module</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="python-modules_creating-modules.html" class="internal"><span class="codenumber">8.5</span> <span class="title">Creating Modules</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="python-modules_glossary.html" class="internal"><span class="codenumber">8.6</span> <span class="title">Glossary</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-glossary"><div class="toc-title-box"><a href="python-modules_glossary.html#python-modules_glossary-2" class="internal"><span class="codenumber">8.6</span> <span class="title">Glossary</span></a></div></li></ul>
+</li>
+<li class="toc-item toc-exercises"><div class="toc-title-box"><a href="python-modules_exercises.html" class="internal"><span class="codenumber">8.7</span> <span class="title">Exercises</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-backmatter">
+<div class="toc-title-box"><a href="pythonds-12.html" class="internal"><span class="title">Back Matter</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-index"><div class="toc-title-box"><a href="pythonds-12-1.html" class="internal"><span class="title">Index</span></a></div></li></ul>
+</li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content">
+<div class="ws-page-controls">
+<form class="papersize-select" id="papersize-select">
+<span class="name">Paper size</span><label><input type="radio" name="papersize" value="a4">A4
+        </label><label><input type="radio" name="papersize" value="letter">Letter
+        </label>
+</form>
+<button class="print-button" title="Print" onClick="window.print()"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8ad;</span><span class="name">Print</span></button>
+</div>
+<section class="worksheet" id="func-string"><h2 class="heading hide-type">
+<span class="type">Worksheet</span><span class="space"> </span><span class="codenumber">7.21</span><span class="space"> </span><span class="title">Group Work: Functions and Strings</span><div class="print-links"><a href="func-string-printable.html" class="print-link" title="Print preview"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8ad;</span></a></div>
+</h2>
+<div class="para" id="func-string-2">It is best to use a POGIL approach with the following. In POGIL students work in groups on activities and each member has an assigned role.  For more information see <a class="external" href="https://cspogil.org/Home" target="_blank">https://cspogil.org/Home</a><details class="ptx-footnote" aria-live="polite" id="func-string-2-2"><summary class="ptx-footnote__number" title="Footnote 7.21.1"><sup> 1 </sup></summary><div class="ptx-footnote__contents" id="func-string-2-2"><code class="code-inline tex2jax_ignore">https://cspogil.org/Home</code></div></details>.<div class="autopermalink" data-description="Paragraph"><a href="#func-string-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="note remark-like" id="func-string-3"><h3 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">7.21.1</span><span class="period">.</span>
+</h3>
+<div class="para" id="func-string-3-1">If you work in a group, have only one member of the group fill in the answers on this page.  You will be able to share your answers with the group at the bottom of the page.<div class="autopermalink" data-description="Paragraph"><a href="#func-string-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Note 7.21.1"><a href="#func-string-3" title="Copy heading and permalink for Note 7.21.1">🔗</a></div></article><section class="section" id="functions_group-work-functions-and-strings"><h3 class="heading hide-type">
+<span class="type">Section</span><span class="space"> </span><span class="codenumber">7.21.1</span><span class="space"> </span><span class="title">Learning Objectives</span>
+</h3>
+<section class="introduction" id="functions_group-work-functions-and-strings-2"><div class="para" id="functions_group-work-functions-and-strings-2-1">Students will know and be able to do the following.<div class="autopermalink" data-description="Paragraph"><a href="#functions_group-work-functions-and-strings-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="functions_group-work-functions-and-strings-2-2">
+<em class="emphasis">Content Objectives:</em><div class="autopermalink" data-description="Paragraph"><a href="#functions_group-work-functions-and-strings-2-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="functions_group-work-functions-and-strings-2-3">
+<ul class="disc" id="functions_group-work-functions-and-strings-2-3-1">
+<li id="functions_group-work-functions-and-strings-2-3-1-1">
+<div class="para" id="functions_group-work-functions-and-strings-2-3-1-1-1">Recognize strings.<div class="autopermalink" data-description="Paragraph"><a href="#functions_group-work-functions-and-strings-2-3-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#functions_group-work-functions-and-strings-2-3-1-1" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="functions_group-work-functions-and-strings-2-3-1-2">
+<div class="para" id="functions_group-work-functions-and-strings-2-3-1-2-1">Use string indices.<div class="autopermalink" data-description="Paragraph"><a href="#functions_group-work-functions-and-strings-2-3-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#functions_group-work-functions-and-strings-2-3-1-2" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="functions_group-work-functions-and-strings-2-3-1-3">
+<div class="para" id="functions_group-work-functions-and-strings-2-3-1-3-1">Understand how slice works for both positive and negative indices.<div class="autopermalink" data-description="Paragraph"><a href="#functions_group-work-functions-and-strings-2-3-1-3-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#functions_group-work-functions-and-strings-2-3-1-3" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="functions_group-work-functions-and-strings-2-3-1-4">
+<div class="para" id="functions_group-work-functions-and-strings-2-3-1-4-1">Use input and convert between strings and numbers.<div class="autopermalink" data-description="Paragraph"><a href="#functions_group-work-functions-and-strings-2-3-1-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#functions_group-work-functions-and-strings-2-3-1-4" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="functions_group-work-functions-and-strings-2-3-1-5">
+<div class="para" id="functions_group-work-functions-and-strings-2-3-1-5-1">Recognize common string methods.<div class="autopermalink" data-description="Paragraph"><a href="#functions_group-work-functions-and-strings-2-3-1-5-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#functions_group-work-functions-and-strings-2-3-1-5" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#functions_group-work-functions-and-strings-2-3" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="functions_group-work-functions-and-strings-2-4">
+<em class="emphasis">Process Objectives:</em><div class="autopermalink" data-description="Paragraph"><a href="#functions_group-work-functions-and-strings-2-4" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para logical" id="functions_group-work-functions-and-strings-2-5">
+<ul class="disc" id="functions_group-work-functions-and-strings-2-5-1">
+<li id="functions_group-work-functions-and-strings-2-5-1-1">
+<div class="para" id="functions_group-work-functions-and-strings-2-5-1-1-1">Predict the output from code.<div class="autopermalink" data-description="Paragraph"><a href="#functions_group-work-functions-and-strings-2-5-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#functions_group-work-functions-and-strings-2-5-1-1" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+<li id="functions_group-work-functions-and-strings-2-5-1-2">
+<div class="para" id="functions_group-work-functions-and-strings-2-5-1-2-1">Modify code to produce the correct output.<div class="autopermalink" data-description="Paragraph"><a href="#functions_group-work-functions-and-strings-2-5-1-2-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Item"><a href="#functions_group-work-functions-and-strings-2-5-1-2" title="Copy heading and permalink for Item">🔗</a></div>
+</li>
+</ul>
+<div class="autopermalink" data-description="Paragraph"><a href="#functions_group-work-functions-and-strings-2-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="functions_group-work-functions-and-strings-2-6">A <dfn class="terminology">string</dfn> is a sequence of characters enclosed in quotes.  In Python you can use pairs of single or double quotes to enclose a string.  You can even use tripe quotes when a string covers more than one line.<div class="autopermalink" data-description="Paragraph"><a href="#functions_group-work-functions-and-strings-2-6" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></section><section class="subsection" id="functions_string-indices"><h4 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber">7.21.1.1</span><span class="space"> </span><span class="title">String Indices</span>
+</h4>
+<article class="exercise exercise-like" id="funct_fitb_pogil_initials_v2"><h5 class="heading"><span class="codenumber">1<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone fillintheblank_section"><div data-component="fillintheblank" data-question_label="" id="rs-funct_fitb_pogil_initials_v2">
+<div class="para" id="funct_fitb_pogil_initials_v2-1-1">What is the last thing that will be printed when the code below runs? <input type="text" placeholder="Text"><div class="autopermalink" data-description="Paragraph"><a href="#funct_fitb_pogil_initials_v2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<script type="application/json">[[{"regex": "^\\s*Jk\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_pogil_initials_v2-2-1-1-1-1\">It prints the first letter of the first name and last letter of the last name.<\/div>"}, {"regex": "^\\s*.*\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_pogil_initials_v2-2-1-2-1-1\">String indices start with 0 and -1 is the index of the last letter in a string.<\/div>"}]]</script>
+</div></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.1"><a href="#funct_fitb_pogil_initials_v2" title="Copy heading and permalink for Worksheet Exercise 7.21.1">🔗</a></div></article><article class="exercise exercise-like" id="funct_ac_pogil_initials_v2"><h5 class="heading"><span class="codenumber">2<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone explainer ac_section "><div data-component="activecode" id="rs-funct_ac_pogil_initials_v2">
+<div class="ac_question exercise-statement" id="rs-funct_ac_pogil_initials_v2_question"><div class="para" id="funct_ac_pogil_initials_v2-1-1">Run the code below to see what it prints.  Then fix it to pass the given test.  It should return a string with the first character of the first name and first character of the last name.<div class="autopermalink" data-description="Paragraph"><a href="#funct_ac_pogil_initials_v2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<textarea data-lang="python" data-audio="" data-coach="true" style="visibility: hidden;" id="rs-funct_ac_pogil_initials_v2_editor" data-question_label="" data-codelens="true" data-timelimit="25000"># function definition
+def get_initials(first, last):
+    return first[0] + last[-1]
+
+# function definition
+def main():
+    print(type("Hello"))
+    print(type('Class'))
+    print(type(42))
+
+    print(get_initials("J'Quan",'Alik'))
+
+
+# function call
+main()
+
+from unittest.gui import TestCaseGui
+class myTests(TestCaseGui):
+
+    def testOne(self):
+        self.assertEqual(get_initials("J'Quan",'Alik'),"JA",'''get_initials("J'Quan",'Alik')''')
+
+myTests().main()
+</textarea>
+</div></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.2"><a href="#funct_ac_pogil_initials_v2" title="Copy heading and permalink for Worksheet Exercise 7.21.2">🔗</a></div></article><article class="note remark-like" id="functions_string-indices-4"><h5 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">7.21.3</span><span class="period">.</span>
+</h5>
+<div class="para" id="functions_string-indices-4-1">Use [index] to get a character from a string.  The first character in a string is at index 0 and the last is at the length of the string minus 1 (also know as index -1 in Python).  Also note that you can use pairs of single quotes or double quotes to create a string.  This is useful when the string includes a single quote.<div class="autopermalink" data-description="Paragraph"><a href="#functions_string-indices-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Note 7.21.3"><a href="#functions_string-indices-4" title="Copy heading and permalink for Note 7.21.3">🔗</a></div></article><div class="para" id="functions_string-indices-5">Fix the function <code class="code-inline tex2jax_ignore">get_initials</code> above to return a string with the first letter of the first name followed by the first letter of the last name.<div class="autopermalink" data-description="Paragraph"><a href="#functions_string-indices-5" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="exercise exercise-like" id="funct_fitb_hello_type"><h5 class="heading"><span class="codenumber">3<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone fillintheblank_section"><div data-component="fillintheblank" data-question_label="" id="rs-funct_fitb_hello_type">
+<div class="para" id="funct_fitb_hello_type-1-1">What type of thing is “Hello”, i.e. what class does it belong to? <input type="text" placeholder="Text"><div class="autopermalink" data-description="Paragraph"><a href="#funct_fitb_hello_type-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<script type="application/json">[[{"regex": "^\\s*'?str'?\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_hello_type-2-1-1-1-1\">A string in Python is an object of the str class.<\/div>"}, {"regex": "^\\s*.*\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_hello_type-2-1-2-1-1\">What is the class name printed by print(type(“Hello”))?<\/div>"}]]</script>
+</div></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.3"><a href="#funct_fitb_hello_type" title="Copy heading and permalink for Worksheet Exercise 7.21.3">🔗</a></div></article><article class="exercise exercise-like" id="funct_fitb_42_type"><h5 class="heading"><span class="codenumber">4<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone fillintheblank_section"><div data-component="fillintheblank" data-question_label="" id="rs-funct_fitb_42_type">
+<div class="para" id="funct_fitb_42_type-1-1">What type of thing is 42, i.e. what class does it belong to? <input type="text" placeholder="Text"><div class="autopermalink" data-description="Paragraph"><a href="#funct_fitb_42_type-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<script type="application/json">[[{"regex": "^\\s*'?int'?\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_42_type-2-1-1-1-1\">An integer in Python is an object of the int class.<\/div>"}, {"regex": "^\\s*.*\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_42_type-2-1-2-1-1\">What is the class name printed by print(type(42))?<\/div>"}]]</script>
+</div></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.4"><a href="#funct_fitb_42_type" title="Copy heading and permalink for Worksheet Exercise 7.21.4">🔗</a></div></article><article class="exercise exercise-like" id="funct_fitb_add_strings"><h5 class="heading"><span class="codenumber">5<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone fillintheblank_section"><div data-component="fillintheblank" data-question_label="" id="rs-funct_fitb_add_strings">
+<div class="para" id="funct_fitb_add_strings-1-1">What is the symbol that is used to append (concatenate) strings together? <input type="text" placeholder="Text"><div class="autopermalink" data-description="Paragraph"><a href="#funct_fitb_add_strings-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<script type="application/json">[[{"regex": "^\\s*\\+\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_add_strings-2-1-1-1-1\">Use + to append one string after another in Python.<\/div>"}, {"regex": "^\\s*.*\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_add_strings-2-1-2-1-1\">Check the code above and try again.<\/div>"}]]</script>
+</div></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.5"><a href="#funct_fitb_add_strings" title="Copy heading and permalink for Worksheet Exercise 7.21.5">🔗</a></div></article><div class="autopermalink" data-description="Subsection 7.21.1.1: String Indices"><a href="#functions_string-indices" title="Copy heading and permalink for Subsection 7.21.1.1: String Indices">🔗</a></div></section><section class="subsection" id="functions_string-slices"><h4 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber">7.21.1.2</span><span class="space"> </span><span class="title">String Slices</span>
+</h4>
+<article class="exercise exercise-like" id="funct_fitb_pogil_short_name"><h5 class="heading"><span class="codenumber">6<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone fillintheblank_section"><div data-component="fillintheblank" data-question_label="" id="rs-funct_fitb_pogil_short_name">
+<div class="para" id="funct_fitb_pogil_short_name-1-1">What is the last thing that will be printed when the code below runs? <input type="text" placeholder="Text"><div class="autopermalink" data-description="Paragraph"><a href="#funct_fitb_pogil_short_name-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<script type="application/json">[[{"regex": "^\\s*Sibs\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_pogil_short_name-2-1-1-1-1\">The last thing it prints are the first two letters of the first name and the last two letters of the last name.<\/div>"}, {"regex": "^\\s*.*\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_pogil_short_name-2-1-2-1-1\">A slice starts with the first number and ends before the second.  If the second is left off it goes to the end of the string. The last character in a string is at index -1.<\/div>"}]]</script>
+</div></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.6"><a href="#funct_fitb_pogil_short_name" title="Copy heading and permalink for Worksheet Exercise 7.21.6">🔗</a></div></article><article class="exercise exercise-like" id="funct_ac_pogil_short_name"><h5 class="heading"><span class="codenumber">7<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone explainer ac_section "><div data-component="activecode" id="rs-funct_ac_pogil_short_name">
+<div class="ac_question exercise-statement" id="rs-funct_ac_pogil_short_name_question"><div class="para" id="funct_ac_pogil_short_name-1-1">Run the code below to see what it prints.<div class="autopermalink" data-description="Paragraph"><a href="#funct_ac_pogil_short_name-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<textarea data-lang="python" data-audio="" data-coach="true" style="visibility: hidden;" id="rs-funct_ac_pogil_short_name_editor" data-question_label="" data-codelens="true" data-timelimit="25000"># function definition
+def get_short_name(first, last):
+    print(len(first))
+    print(len(last))
+    return first[:2] + last[-2:]
+
+# function definition
+def main():
+    print(get_short_name('Simona',"Jacobs"))
+
+# function call
+main()
+</textarea>
+</div></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.7"><a href="#funct_ac_pogil_short_name" title="Copy heading and permalink for Worksheet Exercise 7.21.7">🔗</a></div></article><article class="note remark-like" id="functions_string-slices-4"><h5 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">7.21.9</span><span class="period">.</span>
+</h5>
+<div class="para" id="functions_string-slices-4-1">Use the slice [start:end] operator to get a slice (substring) from a string. It will return a new string starting at the start and including all the characters up to just before the end (end - 1).<div class="autopermalink" data-description="Paragraph"><a href="#functions_string-slices-4-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Note 7.21.9"><a href="#functions_string-slices-4" title="Copy heading and permalink for Note 7.21.9">🔗</a></div></article><article class="exercise exercise-like" id="funct_fitb_three_char_slice"><h5 class="heading"><span class="codenumber">8<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone fillintheblank_section"><div data-component="fillintheblank" data-question_label="" id="rs-funct_fitb_three_char_slice">
+<div class="para" id="funct_fitb_three_char_slice-1-1">Use the slice operator to return the first three characters from the variable <code class="code-inline tex2jax_ignore">dna</code>? <input type="text" placeholder="Text"><div class="autopermalink" data-description="Paragraph"><a href="#funct_fitb_three_char_slice-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<script type="application/json">[[{"regex": "^\\s*dna\\[0\\:3\\]|\\[:3\\]\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_three_char_slice-2-1-1-1-1\">This will return a new string with the characters from index 0 to 2.<\/div>"}, {"regex": "^\\s*.*\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_three_char_slice-2-1-2-1-1\">Look at the note above and try again.<\/div>"}]]</script>
+</div></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.8"><a href="#funct_fitb_three_char_slice" title="Copy heading and permalink for Worksheet Exercise 7.21.8">🔗</a></div></article><article class="exercise exercise-like" id="funct_fitb_last_three_char_slice"><h5 class="heading"><span class="codenumber">9<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone fillintheblank_section"><div data-component="fillintheblank" data-question_label="" id="rs-funct_fitb_last_three_char_slice">
+<div class="para" id="funct_fitb_last_three_char_slice-1-1">Use the slice operator to return a new string with just the last three characters from the variable named <code class="code-inline tex2jax_ignore">dna</code> using a negative index? <input type="text" placeholder="Text"><div class="autopermalink" data-description="Paragraph"><a href="#funct_fitb_last_three_char_slice-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<script type="application/json">[[{"regex": "^\\s*dna\\[-3\\:\\]\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_last_three_char_slice-2-1-1-1-1\">This will return a new string with the last three characters in it.<\/div>"}, {"regex": "^\\s*.*\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_last_three_char_slice-2-1-2-1-1\">Read about negative indicies in Python and try again.<\/div>"}]]</script>
+</div></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.9"><a href="#funct_fitb_last_three_char_slice" title="Copy heading and permalink for Worksheet Exercise 7.21.9">🔗</a></div></article><article class="exercise exercise-like" id="funct_fitb_start_slice_def"><h5 class="heading"><span class="codenumber">10<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone fillintheblank_section"><div data-component="fillintheblank" data-question_label="" id="rs-funct_fitb_start_slice_def">
+<div class="para" id="funct_fitb_start_slice_def-1-1">What index will the slice (substring) start with if the start index isn’t specified? <input type="text" placeholder="Number"><div class="autopermalink" data-description="Paragraph"><a href="#funct_fitb_start_slice_def-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<script type="application/json">[[{"number": [0, 0], "feedback": "<div class=\"para\" id=\"funct_fitb_start_slice_def-2-1-1-1-1\">A slice starts at index 0 if the start isn’t specified.<\/div>"}, {"regex": "^\\s*.*\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_start_slice_def-2-1-2-1-1\">Look at the code above and try again.<\/div>"}]]</script>
+</div></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.10"><a href="#funct_fitb_start_slice_def" title="Copy heading and permalink for Worksheet Exercise 7.21.10">🔗</a></div></article><article class="exercise exercise-like" id="funt_mc_end_slice"><h5 class="heading"><span class="codenumber">11<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone multiplechoice_section">
+<div class="exercise-statement"><div class="para" id="funt_mc_end_slice-1-1">What index is the default end index if it isn’t specified in a slice?<div class="autopermalink" data-description="Paragraph"><a href="#funt_mc_end_slice-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<ul data-component="multiplechoice" class="exercise-interactives" id="rs-funt_mc_end_slice" data-multipleanswers="false">
+<li data-component="answer" id="rs-funt_mc_end_slice_opt_a"><div class="para" id="funt_mc_end_slice-2-1-1-1">0<div class="autopermalink" data-description="Paragraph"><a href="#funt_mc_end_slice-2-1-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></li>
+<li data-component="feedback" id="rs-funt_mc_end_slice_opt_a"><div class="para" id="funt_mc_end_slice-2-1-2-1">This is the default start index</div></li>
+<li data-component="answer" id="rs-funt_mc_end_slice_opt_b"><div class="para" id="funt_mc_end_slice-2-2-1-1">-1 (the index of the last character)<div class="autopermalink" data-description="Paragraph"><a href="#funt_mc_end_slice-2-2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></li>
+<li data-component="feedback" id="rs-funt_mc_end_slice_opt_b"><div class="para" id="funt_mc_end_slice-2-2-2-1">Since a slice does not include the character at the specified end index this would stop at the second to last character in the string</div></li>
+<li data-component="answer" id="rs-funt_mc_end_slice_opt_c" data-correct=""><div class="para" id="funt_mc_end_slice-2-3-1-1">the length of the string<div class="autopermalink" data-description="Paragraph"><a href="#funt_mc_end_slice-2-3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></li>
+<li data-component="feedback" id="rs-funt_mc_end_slice_opt_c"><div class="para" id="funt_mc_end_slice-2-3-2-1">The slice returns a string with all the characters from the start to the end minus one.  That is the same as the length of the string minus one.</div></li>
+</ul>
+</div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.11"><a href="#funt_mc_end_slice" title="Copy heading and permalink for Worksheet Exercise 7.21.11">🔗</a></div></article><article class="exercise exercise-like" id="funct_fitb_string_nchars"><h5 class="heading"><span class="codenumber">12<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone fillintheblank_section"><div data-component="fillintheblank" data-question_label="" id="rs-funct_fitb_string_nchars">
+<div class="para" id="funct_fitb_string_nchars-1-1">What built-in function tells you the number of characters in a string? <input type="text" placeholder="Text"><div class="autopermalink" data-description="Paragraph"><a href="#funct_fitb_string_nchars-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<script type="application/json">[[{"regex": "^\\s*len\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_string_nchars-2-1-1-1-1\">The len function takes a string and returns the number of characters in it.<\/div>"}, {"regex": "^\\s*.*\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_string_nchars-2-1-2-1-1\">Look at the example code above.<\/div>"}]]</script>
+</div></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.12"><a href="#funct_fitb_string_nchars" title="Copy heading and permalink for Worksheet Exercise 7.21.12">🔗</a></div></article><article class="exercise exercise-like" id="fuct_ac_list_join_strings_without_first"><h5 class="heading"><span class="codenumber">13<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone explainer ac_section "><div data-component="activecode" id="rs-fuct_ac_list_join_strings_without_first">
+<div class="ac_question exercise-statement" id="rs-fuct_ac_list_join_strings_without_first_question"><div class="para" id="fuct_ac_list_join_strings_without_first-1-1">Write a function <code class="code-inline tex2jax_ignore">join_no_first</code> that takes two strings <code class="code-inline tex2jax_ignore">a</code> and <code class="code-inline tex2jax_ignore">b</code> and returns a new string with all the characters in string <code class="code-inline tex2jax_ignore">a</code> except the first one followed by all the characters in <code class="code-inline tex2jax_ignore">b</code> except the first one.  For example, <code class="code-inline tex2jax_ignore">join_no_first('hi', 'bye')</code> would return <code class="code-inline tex2jax_ignore">'iye'</code>.<div class="autopermalink" data-description="Paragraph"><a href="#fuct_ac_list_join_strings_without_first-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<textarea data-lang="python" data-audio="" data-coach="true" style="visibility: hidden;" id="rs-fuct_ac_list_join_strings_without_first_editor" data-question_label="" data-codelens="true" data-timelimit="25000">def join_no_first(a, b):
+
+====
+from unittest.gui import TestCaseGui
+
+class myTests(TestCaseGui):
+
+    def testOne(self):
+        self.assertEqual(join_no_first('hi', 'bye'), 'iye', "join_no_first('hi', 'bye')")
+        self.assertEqual(join_no_first('abc', 'cba'), 'bcba', "join_no_first('abc', 'cba')")
+        self.assertEqual(join_no_first('Watch out', 'bye'), 'atch outye', "join_no_first('Watch out', 'bye')")
+        self.assertEqual(join_no_first('123', '456'), '2356', "join_no_first('123', '456')")
+        self.assertEqual(join_no_first('!Hi', 'Bye!'), 'Hiye!', "join_no_first('!Hi', 'Bye!')")
+        self.assertEqual(join_no_first('a', 'x'), '', "join_no_first('a', 'x')")
+
+
+myTests().main()
+</textarea>
+</div></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.13"><a href="#fuct_ac_list_join_strings_without_first" title="Copy heading and permalink for Worksheet Exercise 7.21.13">🔗</a></div></article><div class="autopermalink" data-description="Subsection 7.21.1.2: String Slices"><a href="#functions_string-slices" title="Copy heading and permalink for Subsection 7.21.1.2: String Slices">🔗</a></div></section><section class="subsection" id="functions_input-and-converting-between-strings-and-numbers"><h4 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber">7.21.1.3</span><span class="space"> </span><span class="title">Input and Converting Between Strings and Numbers</span>
+</h4>
+<article class="exercise exercise-like" id="funct_ac_pogil_get_name"><h5 class="heading"><span class="codenumber">14<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone explainer ac_section "><div data-component="activecode" id="rs-funct_ac_pogil_get_name">
+<div class="ac_question exercise-statement" id="rs-funct_ac_pogil_get_name_question"><div class="para" id="funct_ac_pogil_get_name-1-1">Run the code below to see what it prints.<div class="autopermalink" data-description="Paragraph"><a href="#funct_ac_pogil_get_name-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<textarea data-lang="python" data-audio="" data-coach="true" style="visibility: hidden;" id="rs-funct_ac_pogil_get_name_editor" data-question_label="" data-codelens="true" data-timelimit="25000">from datetime import datetime
+
+# function definition
+def get_name():
+    first = input("What is your first name?")
+    print("Hello " + first)
+    age_str = input("What is your age?")
+    today = datetime.today()
+    age = int(age_str)
+    birth_year = today.year - age
+    print("You were born in " + str(birth_year) + " or " + str(birth_year - 1))
+
+# function call
+get_name()
+</textarea>
+</div></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.14"><a href="#funct_ac_pogil_get_name" title="Copy heading and permalink for Worksheet Exercise 7.21.14">🔗</a></div></article><article class="exercise exercise-like" id="funct_fitb_convert_string_int"><h5 class="heading"><span class="codenumber">15<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone fillintheblank_section"><div data-component="fillintheblank" data-question_label="" id="rs-funct_fitb_convert_string_int">
+<div class="para" id="funct_fitb_convert_string_int-1-1">What is the name of the built-in function that will convert a string to an integer? <input type="text" placeholder="Text"><div class="autopermalink" data-description="Paragraph"><a href="#funct_fitb_convert_string_int-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<script type="application/json">[[{"regex": "^\\s*int\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_convert_string_int-2-1-1-1-1\">This will convert a string to an integer<\/div>"}, {"regex": "^\\s*.*\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_convert_string_int-2-1-2-1-1\">Look at the code above and try again.<\/div>"}]]</script>
+</div></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.15"><a href="#funct_fitb_convert_string_int" title="Copy heading and permalink for Worksheet Exercise 7.21.15">🔗</a></div></article><article class="exercise exercise-like" id="funct_fitb_convert_int_string"><h5 class="heading"><span class="codenumber">16<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone fillintheblank_section"><div data-component="fillintheblank" data-question_label="" id="rs-funct_fitb_convert_int_string">
+<div class="para" id="funct_fitb_convert_int_string-1-1">What is the name of the built-in function that will convert an integer to a string? <input type="text" placeholder="Text"><div class="autopermalink" data-description="Paragraph"><a href="#funct_fitb_convert_int_string-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<script type="application/json">[[{"regex": "^\\s*str\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_convert_int_string-2-1-1-1-1\">This will convert a number to a string.<\/div>"}, {"regex": "^\\s*.*\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_convert_int_string-2-1-2-1-1\">Look at the code above and try again.<\/div>"}]]</script>
+</div></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.16"><a href="#funct_fitb_convert_int_string" title="Copy heading and permalink for Worksheet Exercise 7.21.16">🔗</a></div></article><div class="autopermalink" data-description="Subsection 7.21.1.3: Input and Converting Between Strings and Numbers"><a href="#functions_input-and-converting-between-strings-and-numbers" title="Copy heading and permalink for Subsection 7.21.1.3: Input and Converting Between Strings and Numbers">🔗</a></div></section><section class="subsection" id="functions_string-methods"><h4 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber">7.21.1.4</span><span class="space"> </span><span class="title">String Methods</span>
+</h4>
+<div class="para" id="functions_string-methods-2">Strings have methods (functions) that operate on a string object using <dfn class="terminology">dot-notation</dfn> as shown in the example code below.<div class="autopermalink" data-description="Paragraph"><a href="#functions_string-methods-2" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<article class="exercise exercise-like" id="funct_fitb_string_method_pred"><h5 class="heading"><span class="codenumber">17<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone fillintheblank_section"><div data-component="fillintheblank" data-question_label="" id="rs-funct_fitb_string_method_pred">
+<div class="para" id="funct_fitb_string_method_pred-1-1">What will be returned from the <code class="code-inline tex2jax_ignore">get_user_name</code> function below? <input type="text" placeholder="Text"><div class="autopermalink" data-description="Paragraph"><a href="#funct_fitb_string_method_pred-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<script type="application/json">[[{"regex": "^\\s*malana_coffy\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_string_method_pred-2-1-1-1-1\">This will return the first name in lowercase followed by a _ and then the last name in lowercase.<\/div>"}, {"regex": "^\\s*.*\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_string_method_pred-2-1-2-1-1\">Remember that string methods don’t change the original string.<\/div>"}]]</script>
+</div></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.17"><a href="#funct_fitb_string_method_pred" title="Copy heading and permalink for Worksheet Exercise 7.21.17">🔗</a></div></article><article class="exercise exercise-like" id="funct_ac_pogil_user_name"><h5 class="heading"><span class="codenumber">18<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone explainer ac_section "><div data-component="activecode" id="rs-funct_ac_pogil_user_name">
+<div class="ac_question exercise-statement" id="rs-funct_ac_pogil_user_name_question"><div class="para" id="funct_ac_pogil_user_name-1-1">Run the code below to see what it prints.<div class="autopermalink" data-description="Paragraph"><a href="#funct_ac_pogil_user_name-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<textarea data-lang="python" data-audio="" data-coach="true" style="visibility: hidden;" id="rs-funct_ac_pogil_user_name_editor" data-question_label="" data-codelens="true" data-timelimit="25000"># function definition
+def get_user_name(first, last):
+    print(first.lower())
+    print(last.upper())
+    print(first.find('a'))
+    print(first.find('z'))
+    print(last.replace("f", "1"))
+    print(first.split("a"))
+    user = first.lower() + "_" + last.lower()
+    return user
+
+# function definition
+def main():
+    print("run away!".capitalize())
+    print(get_user_name("Malana", "Coffy"))
+
+# function call
+main()
+</textarea>
+</div></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.18"><a href="#funct_ac_pogil_user_name" title="Copy heading and permalink for Worksheet Exercise 7.21.18">🔗</a></div></article><article class="exercise exercise-like" id="funct_fitb_pogil_find_return"><h5 class="heading"><span class="codenumber">19<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone fillintheblank_section"><div data-component="fillintheblank" data-question_label="" id="rs-funct_fitb_pogil_find_return">
+<div class="para" id="funct_fitb_pogil_find_return-1-1">What does the function <code class="code-inline tex2jax_ignore">find</code> return if the character is not found in the string? <input type="text" placeholder="Number"><div class="autopermalink" data-description="Paragraph"><a href="#funct_fitb_pogil_find_return-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<script type="application/json">[[{"number": [-1, -1], "feedback": "<div class=\"para\" id=\"funct_fitb_pogil_find_return-2-1-1-1-1\">If the character isn’t in the string find returns -1.<\/div>"}, {"regex": "^\\s*.*\\s*$", "regexFlags": "", "feedback": "<div class=\"para\" id=\"funct_fitb_pogil_find_return-2-1-2-1-1\">Check the output of find(‘z’) above<\/div>"}]]</script>
+</div></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.19"><a href="#funct_fitb_pogil_find_return" title="Copy heading and permalink for Worksheet Exercise 7.21.19">🔗</a></div></article><article class="note remark-like" id="functions_string-methods-6"><h5 class="heading">
+<span class="type">Note</span><span class="space"> </span><span class="codenumber">7.21.22</span><span class="period">.</span>
+</h5>
+<div class="para" id="functions_string-methods-6-1">Strings are immutable, which means that they do not change.  String methods that appear to change a string return a new string.<div class="autopermalink" data-description="Paragraph"><a href="#functions_string-methods-6-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Note 7.21.22"><a href="#functions_string-methods-6" title="Copy heading and permalink for Note 7.21.22">🔗</a></div></article><article class="exercise exercise-like" id="funct_string_methods_dnd_v3"><h5 class="heading"><span class="codenumber">20<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone cardsort_section"><ul data-component="dragndrop" data-question_label="" style="visibility: hidden;" id="rs-funct_string_methods_dnd_v3">
+<span data-subcomponent="question"><div class="para" id="funct_string_methods_dnd_v3-1-1">Drag each string method to the description of what it does.<div class="autopermalink" data-description="Paragraph"><a href="#funct_string_methods_dnd_v3-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></span><span data-subcomponent="feedback"><div class="para" id="funct_string_methods_dnd_v3-2-1">Read the chapter on strings and try again</div></span><li data-subcomponent="draggable" id="rs-funct_string_methods_dnd_v3_drag1" data-category="1">replace</li>
+<li data-subcomponent="dropzone" for="rs-funct_string_methods_dnd_v3_drag1" data-category="1">Returns a new string with all instances of the first specified character replaced with the second specified character.</li>
+<li data-subcomponent="draggable" id="rs-funct_string_methods_dnd_v3_drag2" data-category="2">lower</li>
+<li data-subcomponent="dropzone" for="rs-funct_string_methods_dnd_v3_drag2" data-category="2">Returns a new string with all of the characters in lowercase.</li>
+<li data-subcomponent="draggable" id="rs-funct_string_methods_dnd_v3_drag3" data-category="3">split</li>
+<li data-subcomponent="dropzone" for="rs-funct_string_methods_dnd_v3_drag3" data-category="3">Returns a list of strings created by splitting the original string at the specified character.</li>
+<li data-subcomponent="draggable" id="rs-funct_string_methods_dnd_v3_drag4" data-category="4">capitalize</li>
+<li data-subcomponent="dropzone" for="rs-funct_string_methods_dnd_v3_drag4" data-category="4">Returns a new string with just the first letter capitalized (uppercase).</li>
+</ul></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.20"><a href="#funct_string_methods_dnd_v3" title="Copy heading and permalink for Worksheet Exercise 7.21.20">🔗</a></div></article><article class="exercise exercise-like" id="funct_ac_pogil_strip_methods_v2"><h5 class="heading"><span class="codenumber">21<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone explainer ac_section "><div data-component="activecode" id="rs-funct_ac_pogil_strip_methods_v2">
+<div class="ac_question exercise-statement" id="rs-funct_ac_pogil_strip_methods_v2_question"><div class="para" id="funct_ac_pogil_strip_methods_v2-1-1">Run the code below to see what it prints.<div class="autopermalink" data-description="Paragraph"><a href="#funct_ac_pogil_strip_methods_v2-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></div>
+<textarea data-lang="python" data-audio="" data-coach="true" style="visibility: hidden;" id="rs-funct_ac_pogil_strip_methods_v2_editor" data-question_label="" data-codelens="true" data-timelimit="25000"># function definition
+def test(the_string):
+    print(len(the_string))
+    s1 = the_string.strip()
+    print(s1)
+    print(len(s1))
+    s2 = the_string.rstrip()
+    print(s2)
+    print(len(s2))
+    s3 = the_string.lstrip()
+    print(s3)
+    print(s3)
+    print(the_string.find('H'))
+
+# function definition
+def main():
+    test(" Help! ")
+
+# function call
+main()
+</textarea>
+</div></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.21"><a href="#funct_ac_pogil_strip_methods_v2" title="Copy heading and permalink for Worksheet Exercise 7.21.21">🔗</a></div></article><article class="exercise exercise-like" id="funct_string_methods2_dnd"><h5 class="heading"><span class="codenumber">22<span class="period">.</span></span></h5>
+<div class="ptx-runestone-container"><div class="runestone cardsort_section"><ul data-component="dragndrop" data-question_label="" style="visibility: hidden;" id="rs-funct_string_methods2_dnd">
+<span data-subcomponent="question"><div class="para" id="funct_string_methods2_dnd-1-1">Drag each string method to the description of what it does.<div class="autopermalink" data-description="Paragraph"><a href="#funct_string_methods2_dnd-1-1" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div></span><span data-subcomponent="feedback"><div class="para" id="funct_string_methods2_dnd-2-1">Read the chapter on strings and try again</div></span><li data-subcomponent="draggable" id="rs-funct_string_methods2_dnd_drag1" data-category="1">strip</li>
+<li data-subcomponent="dropzone" for="rs-funct_string_methods2_dnd_drag1" data-category="1">Returns a new string with leading and trailing spaces removed.</li>
+<li data-subcomponent="draggable" id="rs-funct_string_methods2_dnd_drag2" data-category="2">rstrip</li>
+<li data-subcomponent="dropzone" for="rs-funct_string_methods2_dnd_drag2" data-category="2">Returns a new string with trailing spaces removed.</li>
+<li data-subcomponent="draggable" id="rs-funct_string_methods2_dnd_drag3" data-category="3">lstrip</li>
+<li data-subcomponent="dropzone" for="rs-funct_string_methods2_dnd_drag3" data-category="3">Returns a new string with leading spaces removed.</li>
+<li data-subcomponent="draggable" id="rs-funct_string_methods2_dnd_drag4" data-category="4">find</li>
+<li data-subcomponent="dropzone" for="rs-funct_string_methods2_dnd_drag4" data-category="4">Returns the starting index of a target string if found or -1 if not found.</li>
+</ul></div></div>
+<div class="autopermalink" data-description="Worksheet Exercise 7.21.22"><a href="#funct_string_methods2_dnd" title="Copy heading and permalink for Worksheet Exercise 7.21.22">🔗</a></div></article><div class="para" id="functions_string-methods-10">For more information on string methods see <a class="external" href="https://www.w3schools.com/python/python_ref_string.asp" target="_blank">https://www.w3schools.com/python/python_ref_string.asp</a><details class="ptx-footnote" aria-live="polite" id="functions_string-methods-10-2"><summary class="ptx-footnote__number" title="Footnote 7.21.1"><sup> 1 </sup></summary><div class="ptx-footnote__contents" id="functions_string-methods-10-2"><code class="code-inline tex2jax_ignore">https://www.w3schools.com/python/python_ref_string.asp</code></div></details>.<div class="autopermalink" data-description="Paragraph"><a href="#functions_string-methods-10" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="para" id="functions_string-methods-11">If you worked in a group, you can copy the answers from this page to the other group members.  Select the group members below and click the button to share the answers.<div class="autopermalink" data-description="Paragraph"><a href="#functions_string-methods-11" title="Copy heading and permalink for Paragraph">🔗</a></div>
+</div>
+<div class="autopermalink" data-description="Subsection 7.21.1.4: String Methods"><a href="#functions_string-methods" title="Copy heading and permalink for Subsection 7.21.1.4: String Methods">🔗</a></div></section><div class="autopermalink" data-description="Section 7.21.1: Learning Objectives"><a href="#functions_group-work-functions-and-strings" title="Copy heading and permalink for Section 7.21.1: Learning Objectives">🔗</a></div></section><div class="autopermalink" data-description="Worksheet 7.21: Group Work: Functions and Strings"><a href="#func-string" title="Copy heading and permalink for Worksheet 7.21: Group Work: Functions and Strings">🔗</a></div></section>
+</div>
+<div id="ptx-content-footer" class="ptx-content-footer">
+<a class="previous-button button" href="functions_functions-write-code-questions.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="functions_functions-and-strings-multiple-choice-questions.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
+</div></main>
+</div>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="338 3000 8772 6866" role="img"><title>PreTeXt logo</title><g style="stroke-width:.025in; stroke:currentColor; fill:none"><polyline points="472,3590 472,9732 " style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png" alt="Runstone Academy logo"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png" alt="MathJax logo"></a>
+</div>
+</body>
+</html>

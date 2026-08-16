@@ -1,0 +1,601 @@
+<?xml version="1.0"?>
+<worksheet xml:id="flal_list_groupsub" groupwork="yes" groupsize="4" label="funcWithListsAmdLoops">
+  <title>Group Work: Functions with Lists and Loops</title>
+    <p>It is best to use a POGIL approach with the following. In POGIL students work
+            in groups on activities and each member has an assigned role.  For more information see <url href="https://cspogil.org/Home" visual="https://cspogil.org/Home">https://cspogil.org/Home</url>.</p>
+  <note>
+    <p>If you work in a group, have only one member of the group fill in the answers on this page.  You will be able to share your answers with the group at the bottom of the page.</p>
+  </note>
+<section xml:id="flal_group-work-functions-with-lists-and-loops">
+  <title>Learning Objectives</title>
+  <introduction>
+  <p>Students will know and be able to do the following.</p>
+  <p>
+    <em>Content Objectives:</em>
+  </p>
+  <p>
+    <ul>
+      <li>
+        <p>Understand how list indexing and slicing works.</p>
+      </li>
+      <li>
+        <p>Gain famililarity with built-in fuctions that take lists as well as list methods.</p>
+      </li>
+      <li>
+        <p>Recognize a for-each loop.</p>
+      </li>
+      <li>
+        <p>Recognize a range.</p>
+      </li>
+      <li>
+        <p>Recognize a for loop.</p>
+      </li>
+      <li>
+        <p>Recognize a while loop.</p>
+      </li>
+    </ul>
+  </p>
+  <p>
+    <em>Process Objectives:</em>
+  </p>
+  <p>
+    <ul>
+       <li>
+        <p>Predict the output of code with lists (Information Processing)</p>
+      </li>
+      <li>
+        <p>Write code using the slice operator (Assessment)</p>
+      </li>
+      <li>
+        <p>Write code using built-in functions that take lists</p>
+      </li>
+      <li>
+        <p>Predict the outcome of code with lists and loops.</p>
+      </li>
+      <li>
+        <p>Modify code with loops.</p>
+      </li>
+      <li>
+        <p>Fix code that processes a list with loops.</p>
+      </li>
+    </ul>
+  </p>
+</introduction>
+
+<subsection xml:id="flal_list-indexing-and-slicing">
+    <title>List Indexing and Slicing</title>
+    <p>A list holds items in order and you can get the value at an index, just like you can with strings.  You can also 
+use negative indices, just like you can with strings.  You can use the slice operator <c>[start:end]</c> with lists to get a 
+new list by copying part of a list, just like you can with strings. The new list will include the item at the start index (inclusive) and
+all elements up to the end index - 1. </p>
+ 
+    <exercise label="flal_neg_2_result">
+      <statement>
+        <p>What is the last thing that the following code prints?</p>
+        <program language="python">
+          <input>
+def list_get(lst):
+    print(lst[0])
+    print(lst[:2])
+    return lst[-2]
+l = ["hi", 3, 'buy', 4]
+print(list_get(l))
+</input>
+        </program>
+      </statement>
+      <choices>
+        <choice>
+          <statement>
+            <p>hi</p>
+          </statement>
+          <feedback>
+            <p>This would be true if it was returning the item at index 0 or -4.</p>
+          </feedback>
+        </choice>
+        <choice>
+          <statement>
+            <p>3</p>
+          </statement>
+          <feedback>
+            <p>This would be true if it was returning the item at index 1 or -3.</p>
+          </feedback>
+        </choice>
+        <choice correct="yes">
+          <statement>
+            <p>buy</p>
+          </statement>
+          <feedback>
+            <p>This is returning the second to the last item, the one at index -2.</p>
+          </feedback>
+        </choice>
+        <choice>
+          <statement>
+            <p>4</p>
+          </statement>
+          <feedback>
+            <p>This would be true if it was returning the item at index 3 or -1.</p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+  </subsection>
+
+  <subsection xml:id="flal_built-in-functions-that-work-on-lists">
+    <title>Built-in Functions That Work on Lists</title>
+    <p>There are several built-in functions in Python that work on lists such as <c>max</c>, <c>min</c>, <c>len</c>, and <c>sum</c>.</p>
+    <exercise label="flal_ll_ac_list_func">
+      <statement>
+        <p>Run this code to see what it prints. You can also step through the code using the "Show Codelens" button. </p>
+      </statement>
+      <program xml:id="flal_ll_ac_list_func_editor" interactive="activecode" language="python">
+        <input>
+# function definition
+def list_func(my_list):
+    print("max", max(my_list))
+    print("min", min(my_list))
+    print("len", len(my_list))
+    print("sum", sum(my_list))
+
+# function definition
+def main():
+    list_func([1, 2, 3])
+    list_func([90, 100])
+
+# function call
+main()
+        </input>
+      </program>
+    </exercise>
+
+    <exercise label="flal_ac_sum_first_half">
+      <statement>
+        <p>Write a function <c>sum_first_half</c> that takes a list and returns a the sum of just the first half of the items.  
+   For example, <c>sum_first_half([1,2,3,4])</c> should return ``3`` (sum of 1 and 2) and <c>first_half([7,8,9])</c> should return ``7``.  </p>
+      </statement>
+      <program xml:id="flal_ac_sum_first_half_editor" interactive="activecode" language="python">
+        <input>
+def sum_first_half(alist):
+
+====
+from unittest.gui import TestCaseGui
+
+class myTests(TestCaseGui):
+
+    def testOne(self):
+        self.assertEqual(sum_first_half([1,2,3,4]), 3, 'sum_first_half([1,2,3,4])')
+        self.assertEqual(sum_first_half([7,8,9]), 7, 'sum_first_half([7,8,9])')
+        self.assertEqual(sum_first_half([]), 0, 'sum_first_half([])')
+        self.assertEqual(sum_first_half([6]), 0, 'sum_first_half([6])')
+        self.assertEqual(sum_first_half([1,2,3,4,5]), 3, 'sum_first_half([1,2,3,4,5])')
+        self.assertEqual(sum_first_half([1,2,3,4,5,6]), 6, 'sum_first_half([1,2,3,4,5,6])')
+
+myTests().main()
+        </input>
+      </program>
+    </exercise>
+  </subsection>
+  
+  <subsection xml:id="flal_list-methods">
+    <title>List Methods</title>
+    <p>Lists are objects of the <c>list</c> class and have methods that operate on list objects using dot notation (<c>name.method()</c>) such as <c>append</c>, <c>pop</c>, and <c>extend</c>.</p>
+    <exercise label="flal_ll_ac_list_methods">
+      <statement>
+        <p>Run this code to see what it prints.  You can also step through the code using the "Show Codelens" button.</p>
+      </statement>
+      <program xml:id="flal_ll_ac_list_methods_editor" interactive="activecode" language="python">
+        <input>
+# function definition
+def list_methods(alist):
+    print(type(alist))
+    print(alist)
+    alist.append(3)
+    print(alist)
+    alist.append([2])
+    print(alist)
+    alist.pop(1)
+    print(alist)
+    alist.extend([8, 11])
+    print(alist)
+
+# function definition
+def main():
+    l1 = [1]
+    list_methods(l1)
+    print(l1)
+    l1 = ['hi', 'bye']
+    list_methods(l1)
+    print(l1)
+
+# function call
+main()
+        </input>
+      </program>
+    </exercise>
+
+    
+    <exercise label="flal_list_append_pop_predict">
+      <statement>
+        <p>What would the following code print?</p>
+        <program language="python">
+          <input>
+def list_trans(lst):
+    lst.append(3)
+    lst.pop(2)
+    return lst
+l1 = [2, 5, 7]
+print(list_trans(l1))
+</input>
+        </program>
+      </statement>
+      <choices>
+        <choice>
+          <statement>
+            <p>[5, 7, 3]</p>
+          </statement>
+          <feedback>
+            <p>This would be true if pop removed the first value that was passed in, but it takes an index and removes the item at that index.</p>
+          </feedback>
+        </choice>
+        <choice>
+          <statement>
+            <p>[2, 7, 3]</p>
+          </statement>
+          <feedback>
+            <p>This would be true if pop removed the item at index 1, but it removes the item at index 2 and the first item is at index 0.</p>
+          </feedback>
+        </choice>
+        <choice>
+          <statement>
+            <p>[2, 5, 7]</p>
+          </statement>
+          <feedback>
+            <p>This would be true if pop removed the last item, but it removes the one at index 2.</p>
+          </feedback>
+        </choice>
+        <choice correct="yes">
+          <statement>
+            <p>[2, 5, 3]</p>
+          </statement>
+          <feedback>
+            <p>Correct.  This adds 3 at the end and then removes the item at index 2.</p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+
+    <note>
+      <p>Lists are mutable (changeable).  List methods like <c>append</c> and <c>pop</c> change the current list.</p>
+    </note>
+    
+      <p>You can also reverse a list or sort it.</p>
+
+      <exercise label="flal_ll_ac_list_methods2">
+      <statement>
+        <p>Run this code to see what it prints.</p>
+      </statement>
+      <program xml:id="flal_ll_ac_list_methods2_editor" interactive="activecode" language="python">
+        <input>
+# function definition
+def list_methods2(alist):
+    print(alist)
+    alist.reverse()
+    print(alist)
+    alist.sort()
+    print(alist)
+    alist.sort(reverse = True)
+    print(alist)
+
+# function definition
+def main():
+    l1 = [-2, 50, -20, 30]
+    list_methods2(l1)
+    print(l1)
+    l1 = ['hi', 'bye', 'apple']
+    list_methods2(l1)
+    print(l1)
+
+# function call
+main()
+        </input>
+      </program>
+    </exercise>
+
+  
+    <exercise label="flal_list_result_of_reverse">
+      <statement>
+        <p>What is the last thing the following code prints?</p>
+        <program language="python">
+          <input>
+def list_trans(lst):
+    r = lst.reverse()
+    print(lst)
+    print(r)
+
+l1 = [2, 5, 7]
+list_trans(l1)
+</input>
+        </program>
+      </statement>
+      <choices>
+        <choice correct="yes">
+          <statement>
+            <p>None</p>
+          </statement>
+          <feedback>
+            <p>It prints the return value from the reverse method which is None.</p>
+          </feedback>
+        </choice>
+        <choice>
+          <statement>
+            <p>[2, 5, 7]</p>
+          </statement>
+          <feedback>
+            <p>This would be true if it printed the value of</p>
+          </feedback>
+        </choice>
+        <choice>
+          <statement>
+            <p>[7, 5, 2]]</p>
+          </statement>
+          <feedback>
+            <p>This would be true if pop removed the item at index 1, but it removes the item at index 2 and the first item is at index 0.</p>
+          </feedback>
+        </choice>
+        <choice>
+          <statement>
+            <p>Nothing, there will be an error.</p>
+          </statement>
+          <feedback>
+            <p>This would be true if pop removed the last item, but it removes the one at index 2.</p>
+          </feedback>
+        </choice>
+      </choices>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="flal_the-for-each-loop">
+    <title>The For-Each Loop</title>
+    <p>A for-each loop in Python will loop though the items in a list starting with the item at index 0, then index 1, and so on till the last item in the list.</p>
+   
+    <exercise label="flal_ll_fitb_count_odd_first">
+      <statement>
+        <p>What is the first thing that will be printed by the code below? <var/>  </p>
+      </statement>
+      <setup>
+        <var>
+          <condition number="1">
+            <feedback>
+              <p>It will print the number of values that are odd in the first list, which is one.</p>
+            </feedback>
+          </condition>
+          <condition string=".*">
+            <feedback>
+              <p>Run the code to check.</p>
+            </feedback>
+          </condition>
+        </var>
+      </setup>
+    </exercise>
+
+
+    <exercise label="flal_ll_ac_count_odd">
+      <statement>
+        <p>Run this code to see what it prints.</p>
+      </statement>
+      <program xml:id="flal_ll_ac_count_odd_editor" interactive="activecode" language="python">
+        <input>
+# function definition
+def count_odd(num_list):
+    count = 0
+    for num in num_list:
+        if num % 2 == 1:
+            count += 1
+    return count
+
+# function definition
+def main():
+    list1 = [2, 8, 9]
+    print(count_odd(list1))
+    list1 = [1, 3, 5]
+    print(count_odd(list1))
+    list1 = [0]
+    print(count_odd(list1))
+
+# function call
+main()
+        </input>
+      </program>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="flal_range-and-for">
+    <title>Range and For</title>
+    <p>How do you loop just a set number of times?  You can use
+                the built-in <c>range</c> function to do this.</p>
+    
+    <exercise label="flal_ll_fitb_print_to_last">
+      <statement>
+        <p>What is last value that that following code prints? <var/>  </p>
+      </statement>
+      <setup>
+        <var>
+          <condition number="2">
+            <feedback>
+              <p>The code prints from 0 to the passed end (exclusive).  The end is 3 which means the last value is 2.</p>
+            </feedback>
+          </condition>
+          <condition string=".*">
+            <feedback>
+              <p>What is the parameter in the second call to count_to?</p>
+            </feedback>
+          </condition>
+        </var>
+      </setup>
+    </exercise>
+    <exercise label="flal_ll_ac_count_to">
+      <statement>
+        <p>Run this code to see what it prints.</p>
+      </statement>
+      <program xml:id="flal_ll_ac_count_to_editor" interactive="activecode" language="python">
+        <input>
+# function definition
+def print_to(end):
+    for x in range(end):
+        print(x)
+
+# function definition
+def main():
+    print_to(5)
+    print()
+    print_to(3)
+
+# function call
+main()
+        </input>
+      </program>
+    </exercise>
+
+    <note>
+      <p>The <c>range(end)</c> function will produce values from 0 to end - 1.</p>
+    </note>
+
+    <exercise label="flal_ll_fitb_print_from_to_by_last">
+      <statement>
+        <p>What is last value that that following code prints? <var/>  </p>
+      </statement>
+      <setup>
+        <var>
+          <condition number="9">
+            <feedback>
+              <p>The code prints from start (inclusive) which is 1 to the passed end (exclusive) which is 10 and changes by 2 each time so the end is 9.</p>
+            </feedback>
+          </condition>
+          <condition string=".*">
+            <feedback>
+              <p>Run the code and see.</p>
+            </feedback>
+          </condition>
+        </var>
+      </setup>
+    </exercise>
+
+    <exercise label="flal_ll_ac_print_from_to_by">
+      <statement>
+        <p>Run this code to see what it prints.</p>
+      </statement>
+      <program xml:id="flal_ll_ac_print_from_to_by_editor" interactive="activecode" language="python">
+        <input>
+# function definition
+def print_from_to_by(start, end, by):
+    for x in range(start, end, by):
+        print(x)
+
+# function definition
+def main():
+    print_from_to_by(10,0,-1)
+    print()
+    print_from_to_by(1,10,2)
+
+# function call
+main()
+        </input>
+      </program>
+    </exercise>
+
+    <note>
+      <p>The function <c>range(start, end, by)</c> will return a range object (an iterator) that allows you to loop from <c>start</c> (inclusive) to <c>end</c> (exclusive) and add the value of <c>by</c> after each execution of the loop.</p>
+    </note>
+
+    <exercise label="flal_ll_pp_total_at_odd_indices" numbered="yes" adaptive="yes" indentation="hide" language="python">
+      <statement>
+        <p>Drag the blocks from the left and put them in the correct order on the right to define a function <c>total_at_odd_indices</c> that returns the total of the numbers at odd indices in the passed list.</p>
+      </statement>
+      <blocks>
+        <block order="3">
+          <choice correct="yes">
+            <cline>def total_at_odd_indices(alist):</cline>
+          </choice>
+          <choice>
+            <cline>def total_at_odd_indices(alist) </cline>
+          </choice>
+        </block>
+        <block order="5">
+          <cline>     total = 0</cline>
+        </block>
+        <block order="1">
+          <choice correct="yes">
+            <cline>     for i in range(1,len(alist),2):</cline>
+          </choice>
+          <choice>
+            <cline>     for i in range(1,len(alist)): </cline>
+          </choice>
+        </block>
+        <block order="2">
+          <choice correct="yes">
+            <cline>         total += alist[i]</cline>
+          </choice>
+          <choice>
+            <cline>         total += i </cline>
+          </choice>
+        </block>
+        <block order="7">
+          <cline>     return total</cline>
+        </block>
+      </blocks>
+    </exercise>
+  </subsection>
+
+  <subsection xml:id="flal_while-loops">
+    <title>While Loops</title>
+    <p>A while loop repeats while a Boolean expression is True.</p>
+    <exercise label="flal_ll_ac_inifite">
+      <statement>
+        <p>Try running the code below.</p>
+      </statement>
+      <program xml:id="flal_ll_ac_inifite_editor" interactive="activecode" language="python">
+        <input>
+def example():
+    count = 0
+    while (True):
+        print("This is the song that never ends", count)
+        count += 1
+        if (count &gt; 100):
+            break
+
+def main():
+    example()
+
+main()
+        </input>
+      </program>
+    </exercise>
+
+    <exercise label="flal_ll_fitb_while_break">
+      <statement>
+        <p>What keyword is used to stop the loop in the above code? <var/>  </p>
+      </statement>
+      <setup>
+        <var>
+          <condition string="break">
+            <feedback>
+              <p>The break keyword will stop the enclosing loop.</p>
+            </feedback>
+          </condition>
+          <condition string=".*">
+            <feedback>
+              <p>How does the code stop above?</p>
+            </feedback>
+          </condition>
+        </var>
+      </setup>
+    </exercise>
+
+    <note>
+      <p>A loop that never ends is called an infinite loop.  A while loop should have some way to end.  If you have an infinite loop you may need to refresh the page to stop it.</p>
+    </note>
+
+    <p>If you worked in a group, you can copy the answers from this page to the other group members.  Select the group members below and click the button to share the answers.</p>
+  </subsection>
+</section>
+</worksheet>

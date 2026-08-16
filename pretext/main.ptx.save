@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pretext xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en-US">
+  <xi:include href="./bookinfo.ptx"/>
+  <book xml:id="pythonds-1213" permid="pyt">
+    <title>Problem Solving with Algorithms and Data Structures using Python</title>
+    <subtitle>The Interactive Edition</subtitle>
+    <frontmatter>
+    <titlepage>
+    <author>
+     <personname>Bradley N. Miller</personname>
+     <institution>Runestone Academy</institution>
+     </author>
+     <author>
+     <personname>David L. Ranum</personname>
+     </author>
+     <author>
+     <personname>Roman Yasinovskyy</personname>
+     <institution>Luther College</institution>
+     </author>
+    </titlepage>
+    <colophon>
+    <p>The paper version of this book is available through Franklin Beedle &amp; Associates. We are greatful to them for their vision in allowing us to publish an interactive edition online for free.</p>
+       <copyright>
+       <holder>Franklin Beedle &amp; Associates</holder>
+       <year>2023</year>
+     </copyright>
+     <minilicense>
+      The online version of this work is made available under the Creative Commons Attribution, Share Alike, Non-Commercial license.<image source="by-nc-sa.png" width="20%" description="CC-BY-NC_SA" />
+      </minilicense>
+
+    </colophon>
+
+    </frontmatter>
+    <xi:include href="./functions/toctree.ptx"/>
+    <xi:include href="./BasicDS/toctree.ptx"/>
+    <xi:include href="./ClassesBasics/toctree.ptx"/>
+    <xi:include href="./functions1/toctree.ptx"/>
+    <xi:include href="./Lists/toctree.ptx"/>
+    <xi:include href="./SortSearch/toctree.ptx"/>
+    <backmatter>
+      <index>
+        <index-list/>
+      </index>
+    </backmatter>
+  </book>
+</pretext>

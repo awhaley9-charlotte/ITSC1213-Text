@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<figure class="listing figure-like"><figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">1.9.11<span class="period">.</span></span><span class="space"> </span><div class="autopermalink" data-description="Listing 1.9.11"><a href="#lst-postfixeval" title="Copy heading and permalink for Listing 1.9.11">🔗</a></div></figcaption><div class="listing__contents"><div class="ptx-runestone-container"><div class="runestone explainer ac_section "><div data-component="activecode" id="rs-lst-postfixeval"><textarea data-lang="python" data-audio="" data-coach="true" style="visibility: hidden;" id="rs-lst-postfixeval_editor" data-question_label="" data-codelens="true" data-timelimit="25000">from pythonds3.basic import Stack
+
+def postfix_eval(postfix_expr):
+    operand_stack = Stack()
+    token_list = postfix_expr.split()
+
+    for token in token_list:
+        if token in "0123456789":
+            operand_stack.push(int(token))
+        else:
+            operand2 = operand_stack.pop()
+            operand1 = operand_stack.pop()
+            result = do_math(token, operand1, operand2)
+            operand_stack.push(result)
+    return operand_stack.pop()
+
+
+def do_math(op, op1, op2):
+    if op == "*":
+        return op1 * op2
+    elif op == "/":
+        return op1 / op2
+    elif op == "+":
+        return op1 + op2
+    else:
+        return op1 - op2
+
+
+print(postfix_eval("7 8 + 3 2 + /"))
+</textarea></div></div></div></div></figure><span class="incontext"><a class="internal" href="basic-ds_infix-prefix-and-postfix-expressions.html#lst-postfixeval">in-context</a></span>
+</body>
+</html>

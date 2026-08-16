@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--******************************************-->
+<!--*  Authored with PreTeXt                 *-->
+<!--*  pretextbook.org                       *-->
+<!--*  Theme: default-modern                 *-->
+<!--*  Palette:                              *-->
+<!--******************************************-->
+
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<figure class="listing figure-like"><figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">1.5.1<span class="period">.</span></span><span class="space"> </span><div class="autopermalink" data-description="Listing 1.5.1"><a href="#lst-stackcode1" title="Copy heading and permalink for Listing 1.5.1">🔗</a></div></figcaption><div class="listing__contents"><div class="ptx-runestone-container"><div class="runestone explainer ac_section "><div data-component="activecode" id="rs-lst-stackcode1"><textarea data-lang="python" data-audio="" data-coach="true" style="visibility: hidden;" id="rs-lst-stackcode1_editor" data-question_label="" data-codelens="true" data-timelimit="25000">class Stack:
+    """Stack implementation as a list"""
+
+    def __init__(self):
+        """Create new stack"""
+        self._items = []
+
+    def is_empty(self):
+        """Check if the stack is empty"""
+        return not bool(self._items)
+
+    def push(self, item):
+        """Add an item to the stack"""
+        self._items.append(item)
+
+    def pop(self):
+        """Remove an item from the stack"""
+        return self._items.pop()
+
+    def peek(self):
+        """Get the value of the top item in the stack"""
+        return self._items[-1]
+
+    def size(self):
+        """Get the number of items in the stack"""
+        return len(self._items)
+</textarea></div></div></div></div></figure><span class="incontext"><a class="internal" href="basic-ds_implementing-a-stack-in-python.html#lst-stackcode1">in-context</a></span>
+</body>
+</html>
