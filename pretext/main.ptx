@@ -2,7 +2,7 @@
 <pretext xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en-US">
   <xi:include href="./bookinfo.ptx"/>
   <book xml:id="pythonds" permid="dspy">
-    <title>ITSC 1213 - Python Problem Solving and Data Structures-lite.</title>
+    <title>ITSC 1213 - Python Problem Solving and Data Structures-lite</title>
     <subtitle>The Interactive Edition</subtitle>
     <frontmatter>
     <titlepage>
