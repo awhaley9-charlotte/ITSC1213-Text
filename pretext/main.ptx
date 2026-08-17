@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pretext xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en-US">
   <xi:include href="./bookinfo.ptx"/>
-  <book xml:id="pythonds" permid="dspy">
-    <title>ITSC 1213 - Python Problem Solving and Intro to Data Structures</title>
+  <book xml:id="ppsds" permid="psds">
+    <title>Python Problem Solving and Intro to Data Structures</title>
     <subtitle>The Interactive Edition</subtitle>
     <frontmatter>
     <titlepage>
