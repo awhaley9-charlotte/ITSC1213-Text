@@ -33,7 +33,7 @@
 <xi:include href="./files/toctree.ptx"/>
 <xi:include href="./functions1/toctree.ptx"/>
 <xi:include href="./Lists/toctree.ptx"/>
-<xi:include href="./Dictionaries/toctree.ptx"/>
+<xi:include href="./dictionaries/toctree.ptx"/>
 
 
 <xi:include href="./SortSearch/toctree.ptx"/>
